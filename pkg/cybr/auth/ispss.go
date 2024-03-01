@@ -1,56 +1,70 @@
 package auth
 
-func handleIdentityAuthn() string {
+import (
+	"encoding/json"
+	"io"
+	"log"
+	"net/http"
+	"net/url"
+	"strings"
 
-	h.httpClient();
-	// authnUrl := "https://" + tenant + ".id.cyberark.cloud/oauth2/platformtoken"
-	// method := "POST"
+	// API Includes
+	h "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
+)
 
-	// payload := strings.NewReader("client_id=" + url.QueryEscape(pasUser) + "&grant_type=" + gt + "&client_secret=" + pasPassword)
+func handleIdentityAuthn(Tenant string, ClientID string, ClientSecret string) string {
 
-	// req, err := http.NewRequest(method, authnUrl, payload)
-	// if err != nil {
+	client := h.GetClient();
 
-	// 	log.Fatal(err)
+	authnUrl := "https://" + Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
+	method := "POST"
 
-	// }
+	payload := strings.NewReader("client_id=" + url.QueryEscape(ClientID) + "&grant_type=" + gt + "&client_secret=" + ClientSecret)
 
-	// req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req, err := http.NewRequest(method, authnUrl, payload)
+	if err != nil {
 
-	// res, err := client.Do(req)
-	// if err != nil {
+		log.Fatal(err)
 
-	// 	log.Fatal(err)
+	}
 
-	// }
-	// defer res.Body.Close()
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	// body, err := io.ReadAll(res.Body)
-	// if err != nil {
+	res, err := client.Do(req)
+	if err != nil {
 
-	// 	log.Fatal(err)
+	log.Fatal(err)
 
-	// }
+	}
+	defer res.Body.Close()
 
-	// if res.StatusCode == 200 {
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
 
-	// 	authzToken := token{}
-	// 	jsonError := json.Unmarshal(body, &authzToken)
-	// 	if jsonError != nil {
+		log.Fatal(err)
 
-	// 		log.Fatal(jsonError)
+	}
 
-	// 	}
-	// 	return string(authzToken.Access_token)
+	if res.StatusCode == 200 {
 
-	// } else {
+		authzToken := types.Token{}
+		jsonError := json.Unmarshal(body, &authzToken)
+		if jsonError != nil {
 
-	// 	log.Println(string(body))
-	// 	log.Fatal("Failed to authenticate:", res.StatusCode)
+			log.Fatal(jsonError)
 
-	// }
+		}
+		return string(authzToken.Access_token)
 
-	// log.Fatal("Unable to authenticate to ISPSS.")
-	// return "Failed."
+	} else {
+
+		log.Println(string(body))
+		log.Fatal("Failed to authenticate:", res.StatusCode)
+
+	}
+
+	log.Fatal("Unable to authenticate to Shared Services.")
+	return "false"
 
 }
