@@ -1,1 +1,5 @@
 package auth
+
+func init() {
+
+}

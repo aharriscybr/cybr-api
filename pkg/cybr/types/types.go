@@ -1,5 +1,10 @@
 package types
 
+/*
+=========================================
+* Structs
+=========================================
+*/
 
 type Permission struct {
 	ManageSafe								bool `json:"manageSafe"`
@@ -25,6 +30,12 @@ type Permission struct {
 	RequestsAuthorizationLevel1				bool `json:"requestsAuthorizationLevel1"`
 	RequestsAuthorizationLevel2				bool `json:"requestsAuthorizationLevel2"`
 }
+
+/*
+=========================================
+* Functions
+=========================================
+*/
 
 func FullAdmin() Permission {
 
