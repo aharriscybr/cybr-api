@@ -10,10 +10,10 @@ Declare new function returning the **struct**:
 
         // ACL USER
         permissionBlock := Permission {
-        UseAccounts:							true,
-        RetrieveAccounts:						true,
-        ListAccounts:							true,
-        AccessWithoutConfirmation:				true,
+        UseAccounts:    true,
+        RetrieveAccounts:   true,
+        ListAccounts:   true,
+        AccessWithoutConfirmation:  true,
         }
 
         return permissionBlock
