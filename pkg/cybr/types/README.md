@@ -16,8 +16,8 @@ Declare new function returning the **struct** and define the permissions in the 
 	}
 
 	userBlock := Member {
-		Member: u,
-		MemberType: utype,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
