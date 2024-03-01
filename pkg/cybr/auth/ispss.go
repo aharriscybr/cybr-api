@@ -56,7 +56,7 @@ func GetIdentityToken(a types.Authn) (token string, result bool, err error) {
 		jsonError := json.Unmarshal(body, &authzToken)
 		if jsonError != nil {
 
-			log.Fatal(jsonError)
+			log.Println(jsonError)
 
 		}
 		return string(authzToken.Access_token), true, nil
@@ -64,7 +64,7 @@ func GetIdentityToken(a types.Authn) (token string, result bool, err error) {
 	} else {
 
 		log.Println(string(body))
-		log.Fatal("Failed to authenticate:", res.StatusCode)
+		log.Printf("Failed to authenticate: %d", res.StatusCode)
 
 		return "Unable to authenticate to Shared Services.", false, err
 
