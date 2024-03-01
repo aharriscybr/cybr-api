@@ -1,13 +1,20 @@
 package main
 
 import (
-	// API Includes
-	h "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+	"log"
+
+	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 
 func main() {
+	
 	// todo
-	client := h.GetClient();
+	SHUser, err := types.FullAdmin("user", "andrew");
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("%s", string(SHUser))
 
 }
