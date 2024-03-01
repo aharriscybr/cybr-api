@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-
-func httpClient() *http.Client {
+// Return configured HTTP Client
+func GetClient() *http.Client {
 
 	c := &http.Client{
 

@@ -1,5 +1,10 @@
 package types
 
+import (
+	"encoding/json"
+	"log"
+)
+
 /*
 =========================================
 * Structs
@@ -33,9 +38,24 @@ type Permission struct {
 	RequestsAuthorizationLevel2				bool `json:"requestsAuthorizationLevel2"`
 }
 
-// ISPSS Token Struct
+// ACL Struct
 
-type token struct {
+type Member struct {
+	Member			string `json:"memberName"`
+	MemberType 		string `json:"memberType"`
+	Perm 			Permission `json:"permissions"`
+}
+
+// Shared Services Structs
+
+type Authn struct {
+	Tenant 		 string
+	ClientID 	 string
+	ClientSecret string
+	GrantType	 string
+}
+
+type Token struct {
 	Access_token string `json:"access_token"`
 	Token_type   string `json:"token_type"`
 	Expires_in   int    `json:"expires_in"`
@@ -47,10 +67,11 @@ type token struct {
 =========================================
 */
 
-func FullAdmin() Permission {
+// Get Full Administrator Permissions
+// intakes a user type string and user string to bundle permissions
+func FullAdmin(UserType string, User string) ([]byte, error) {
 
-	
-	permissionBlock := Permission {
+	Perm := Permission {
 	ManageSafe:								true,
 	ManageSafeMembers:						true,
 	ViewSafeMembers:						true,
@@ -75,37 +96,78 @@ func FullAdmin() Permission {
 	RequestsAuthorizationLevel2:			true,
 	}
 
-	return permissionBlock
+	userBlock := Member {
+		Member: User,
+		MemberType: UserType,
+		Perm: Perm,
+	}
+
+	thisBlock, err := json.Marshal(userBlock)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return thisBlock, err
 
 }
 
-func ReadOnly() Permission {
+// Get Read Only Permissions
+// intakes a user type string and user string to bundle permissions
+func ReadOnly(UserType string, User string) ([]byte, error) {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
 	}
 
-	return permissionBlock
+	userBlock := Member {
+		Member: User,
+		MemberType: UserType,
+		Perm: Perm,
+	}
+
+	thisBlock, err := json.Marshal(userBlock)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return thisBlock, err
 
 }
 
-func Approver() Permission {
+// Get Approver Permissions
+// intakes a user type string and user string to bundle permissions
+func Approver(UserType string, User string) ([]byte, error) {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
+	ViewSafeMembers:						true,
+	ManageSafeMembers:						true,
 	}
 
-	return permissionBlock
+	userBlock := Member {
+		Member: User,
+		MemberType: UserType,
+		Perm: Perm,
+	}
+
+	thisBlock, err := json.Marshal(userBlock)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return thisBlock, err
 
 }
 
-func Manager() Permission {
+// Get Safe Manager Permissions
+// intakes a user type string and user string to bundle permissions
+func Manager(UserType string, User string) ([]byte, error)  {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	ManageSafeMembers:						true,
 	ViewSafeMembers:						true,
 	ViewAuditLog:							true,
@@ -123,32 +185,69 @@ func Manager() Permission {
 	AccessWithoutConfirmation:				true,
 	}
 
-	return permissionBlock
+	userBlock := Member {
+		Member: User,
+		MemberType: UserType,
+		Perm: Perm,
+	}
+
+	thisBlock, err := json.Marshal(userBlock)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return thisBlock, err
 
 }
 
-func ConjurSync() Permission {
+// Get Conjur Component User Permissions
+// intakes a user type string and user string to bundle permissions
+func ConjurSync(UserType string, User string) ([]byte, error) {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
 	AccessWithoutConfirmation:				true,
 	}
 
-	return permissionBlock
+	userBlock := Member {
+		Member: User,
+		MemberType: UserType,
+		Perm: Perm,
+	}
+
+	thisBlock, err := json.Marshal(userBlock)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return thisBlock, err
 
 }
 
-func SecretsHub() Permission {
+// Get Secrets Hub Component User Permissions
+// intakes a user type string and user string to bundle permissions
+func SecretsHub(UserType string, User string) ([]byte, error) {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	ViewSafeMembers:						true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
 	AccessWithoutConfirmation:				true,
 	}
 
-	return permissionBlock
+	userBlock := Member {
+		Member: User,
+		MemberType: UserType,
+		Perm: Perm,
+	}
+
+	thisBlock, err := json.Marshal(userBlock)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return thisBlock, err
 
 }

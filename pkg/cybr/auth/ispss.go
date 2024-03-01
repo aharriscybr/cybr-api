@@ -7,14 +7,24 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	// API Includes
+	h "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
-func handleIdentityAuthn(hClient) string {
+// Authenticate to Shared Services Identity Platform
+func GetIdentityToken(a types.Authn) (token string, result bool, err error) {
 
-	authnUrl := "https://" + tenant + ".id.cyberark.cloud/oauth2/platformtoken"
+	// Get configured client
+	client := h.GetClient();
+
+	authnUrl := "https://" + a.Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
 	method := "POST"
 
-	payload := strings.NewReader("client_id=" + url.QueryEscape(pasUser) + "&grant_type=" + gt + "&client_secret=" + pasPassword)
+	payload := strings.NewReader("client_id=" + url.QueryEscape(a.ClientID) + "&grant_type=client_credentials&client_secret=" + a.ClientSecret)
+
+	log.Printf("Attempting to authenticate %s to %s", a.ClientID, authnUrl)
 
 	req, err := http.NewRequest(method, authnUrl, payload)
 	if err != nil {
@@ -28,7 +38,7 @@ func handleIdentityAuthn(hClient) string {
 	res, err := client.Do(req)
 	if err != nil {
 
-		log.Fatal(err)
+	log.Fatal(err)
 
 	}
 	defer res.Body.Close()
@@ -42,23 +52,22 @@ func handleIdentityAuthn(hClient) string {
 
 	if res.StatusCode == 200 {
 
-		authzToken := token{}
+		authzToken := types.Token{}
 		jsonError := json.Unmarshal(body, &authzToken)
 		if jsonError != nil {
 
 			log.Fatal(jsonError)
 
 		}
-		return string(authzToken.Access_token)
+		return string(authzToken.Access_token), true, nil
 
 	} else {
 
 		log.Println(string(body))
 		log.Fatal("Failed to authenticate:", res.StatusCode)
 
-	}
+		return "Unable to authenticate to Shared Services.", false, err
 
-	log.Fatal("Unable to authenticate to ISPSS.")
-	return "Failed."
+	}
 
 }
