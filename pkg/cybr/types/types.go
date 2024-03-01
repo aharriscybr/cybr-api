@@ -28,7 +28,7 @@ type Permission struct {
 
 func FullAdmin() Permission {
 
-	// ACL USER
+	
 	permissionBlock := Permission {
 	ManageSafe:								true,
 	ManageSafeMembers:						true,
@@ -60,7 +60,6 @@ func FullAdmin() Permission {
 
 func ReadOnly() Permission {
 
-	// ACL USER
 	permissionBlock := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
@@ -73,7 +72,6 @@ func ReadOnly() Permission {
 
 func Approver() Permission {
 
-	// ACL USER
 	permissionBlock := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
@@ -86,7 +84,6 @@ func Approver() Permission {
 
 func Manager() Permission {
 
-	// ACL USER
 	permissionBlock := Permission {
 	ManageSafeMembers:						true,
 	ViewSafeMembers:						true,
@@ -111,7 +108,6 @@ func Manager() Permission {
 
 func ConjurSync() Permission {
 
-	// ACL USER
 	permissionBlock := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
@@ -125,7 +121,6 @@ func ConjurSync() Permission {
 
 func SecretsHub() Permission {
 
-	// ACL USER
 	permissionBlock := Permission {
 	ViewSafeMembers:						true,
 	RetrieveAccounts:						true,
