@@ -54,6 +54,7 @@ type Token struct {
 =========================================
 */
 
+// Get Full Administrator Permissions
 func FullAdmin() *Permission {
 
 	Perm := Permission {
@@ -85,6 +86,7 @@ func FullAdmin() *Permission {
 
 }
 
+// Get Read Only Permissions
 func ReadOnly() *Permission {
 
 	Perm := Permission {
@@ -97,6 +99,7 @@ func ReadOnly() *Permission {
 
 }
 
+// Get Approver Permissions
 func Approver() *Permission {
 
 	Perm := Permission {
@@ -109,6 +112,7 @@ func Approver() *Permission {
 
 }
 
+// Get Safe Manager Permissions
 func Manager() *Permission {
 
 	Perm := Permission {
@@ -133,6 +137,7 @@ func Manager() *Permission {
 
 }
 
+// Get Conjur Component User Permissions
 func ConjurSync() *Permission {
 
 	Perm := Permission {
@@ -146,6 +151,7 @@ func ConjurSync() *Permission {
 
 }
 
+// Get Secrets Hub Component User Permissions
 func SecretsHub() *Permission {
 
 	Perm := Permission {
@@ -156,17 +162,5 @@ func SecretsHub() *Permission {
 	}
 
 	return &Perm
-
-}
-
-func SetAuthn(t string, cid string, csec string) *Authn {
-
-	AuthnObj := Authn {
-		Tenant: t,
-		ClientID: cid,
-		ClientSecret: csec,
-	}
-
-	return &AuthnObj
 
 }

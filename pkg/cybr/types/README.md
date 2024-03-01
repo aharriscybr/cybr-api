@@ -6,16 +6,16 @@
 
 Declare new function returning the **struct**:
 
-    func NewType() Permission {
+    func NewType() *Permission {
 
-        // ACL USER
-        permissionBlock := Permission {
+        perm := Permission {
         UseAccounts:    true,
         RetrieveAccounts:   true,
         ListAccounts:   true,
         AccessWithoutConfirmation:  true,
         }
 
-        return permissionBlock
+        // Return pointer of the new permissions
+        return &perm
 
     }

@@ -13,7 +13,8 @@ import (
 	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
-func handleIdentityAuthn(a types.Authn) string {
+// Authenticate to Shared Services Identity Platform
+func HandleIdentityAuthn(a types.Authn) string {
 
 	// Get configured client
 	client := h.GetClient();
