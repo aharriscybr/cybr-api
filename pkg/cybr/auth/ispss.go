@@ -10,17 +10,18 @@ import (
 
 	// API Includes
 	h "github.com/aharriscybr/cybr-api/pkg/cybr/http"
-	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
+	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
-func handleIdentityAuthn(Tenant string, ClientID string, ClientSecret string) string {
+func handleIdentityAuthn(a types.Authn) string {
 
+	// Get configured client
 	client := h.GetClient();
 
-	authnUrl := "https://" + Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
+	authnUrl := "https://" + a.Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
 	method := "POST"
 
-	payload := strings.NewReader("client_id=" + url.QueryEscape(ClientID) + "&grant_type=" + gt + "&client_secret=" + ClientSecret)
+	payload := strings.NewReader("client_id=" + url.QueryEscape(a.ClientID) + "&grant_type=" + a.GrantType + "&client_secret=" + a.ClientSecret)
 
 	req, err := http.NewRequest(method, authnUrl, payload)
 	if err != nil {

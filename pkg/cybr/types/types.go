@@ -33,7 +33,14 @@ type Permission struct {
 	RequestsAuthorizationLevel2				bool `json:"requestsAuthorizationLevel2"`
 }
 
-// ISPSS Token Struct
+// Shared Services Structs
+
+type Authn struct {
+	Tenant 		 string
+	ClientID 	 string
+	ClientSecret string
+	GrantType	 string `default:"client_credentials"`
+}
 
 type Token struct {
 	Access_token string `json:"access_token"`
@@ -47,10 +54,9 @@ type Token struct {
 =========================================
 */
 
-func FullAdmin() Permission {
+func FullAdmin() *Permission {
 
-	
-	permissionBlock := Permission {
+	Perm := Permission {
 	ManageSafe:								true,
 	ManageSafeMembers:						true,
 	ViewSafeMembers:						true,
@@ -75,37 +81,37 @@ func FullAdmin() Permission {
 	RequestsAuthorizationLevel2:			true,
 	}
 
-	return permissionBlock
+	return &Perm
 
 }
 
-func ReadOnly() Permission {
+func ReadOnly() *Permission {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
 	}
 
-	return permissionBlock
+	return &Perm
 
 }
 
-func Approver() Permission {
+func Approver() *Permission {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
 	}
 
-	return permissionBlock
+	return &Perm
 
 }
 
-func Manager() Permission {
+func Manager() *Permission {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	ManageSafeMembers:						true,
 	ViewSafeMembers:						true,
 	ViewAuditLog:							true,
@@ -123,32 +129,44 @@ func Manager() Permission {
 	AccessWithoutConfirmation:				true,
 	}
 
-	return permissionBlock
+	return &Perm
 
 }
 
-func ConjurSync() Permission {
+func ConjurSync() *Permission {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
 	AccessWithoutConfirmation:				true,
 	}
 
-	return permissionBlock
+	return &Perm
 
 }
 
-func SecretsHub() Permission {
+func SecretsHub() *Permission {
 
-	permissionBlock := Permission {
+	Perm := Permission {
 	ViewSafeMembers:						true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
 	AccessWithoutConfirmation:				true,
 	}
 
-	return permissionBlock
+	return &Perm
+
+}
+
+func SetAuthn(t string, cid string, csec string) *Authn {
+
+	AuthnObj := Authn {
+		Tenant: t,
+		ClientID: cid,
+		ClientSecret: csec,
+	}
+
+	return &AuthnObj
 
 }
