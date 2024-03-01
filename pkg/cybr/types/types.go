@@ -6,6 +6,8 @@ package types
 =========================================
 */
 
+// Permission Struct
+
 type Permission struct {
 	ManageSafe								bool `json:"manageSafe"`
 	ManageSafeMembers						bool `json:"manageSafeMembers"`
@@ -29,6 +31,14 @@ type Permission struct {
 	MoveAccountsAndFolders					bool `json:"moveAccountsAndFolders"`
 	RequestsAuthorizationLevel1				bool `json:"requestsAuthorizationLevel1"`
 	RequestsAuthorizationLevel2				bool `json:"requestsAuthorizationLevel2"`
+}
+
+// ISPSS Token Struct
+
+type token struct {
+	Access_token string `json:"access_token"`
+	Token_type   string `json:"token_type"`
+	Expires_in   int    `json:"expires_in"`
 }
 
 /*
