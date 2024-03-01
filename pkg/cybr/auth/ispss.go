@@ -1,64 +1,56 @@
 package auth
 
-import (
-	"encoding/json"
-	"io"
-	"log"
-	"net/http"
-	"net/url"
-	"strings"
-)
+func handleIdentityAuthn() string {
 
-func handleIdentityAuthn(hClient) string {
+	h.httpClient();
+	// authnUrl := "https://" + tenant + ".id.cyberark.cloud/oauth2/platformtoken"
+	// method := "POST"
 
-	authnUrl := "https://" + tenant + ".id.cyberark.cloud/oauth2/platformtoken"
-	method := "POST"
+	// payload := strings.NewReader("client_id=" + url.QueryEscape(pasUser) + "&grant_type=" + gt + "&client_secret=" + pasPassword)
 
-	payload := strings.NewReader("client_id=" + url.QueryEscape(pasUser) + "&grant_type=" + gt + "&client_secret=" + pasPassword)
+	// req, err := http.NewRequest(method, authnUrl, payload)
+	// if err != nil {
 
-	req, err := http.NewRequest(method, authnUrl, payload)
-	if err != nil {
+	// 	log.Fatal(err)
 
-		log.Fatal(err)
+	// }
 
-	}
+	// req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	// res, err := client.Do(req)
+	// if err != nil {
 
-	res, err := client.Do(req)
-	if err != nil {
+	// 	log.Fatal(err)
 
-		log.Fatal(err)
+	// }
+	// defer res.Body.Close()
 
-	}
-	defer res.Body.Close()
+	// body, err := io.ReadAll(res.Body)
+	// if err != nil {
 
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
+	// 	log.Fatal(err)
 
-		log.Fatal(err)
+	// }
 
-	}
+	// if res.StatusCode == 200 {
 
-	if res.StatusCode == 200 {
+	// 	authzToken := token{}
+	// 	jsonError := json.Unmarshal(body, &authzToken)
+	// 	if jsonError != nil {
 
-		authzToken := token{}
-		jsonError := json.Unmarshal(body, &authzToken)
-		if jsonError != nil {
+	// 		log.Fatal(jsonError)
 
-			log.Fatal(jsonError)
+	// 	}
+	// 	return string(authzToken.Access_token)
 
-		}
-		return string(authzToken.Access_token)
+	// } else {
 
-	} else {
+	// 	log.Println(string(body))
+	// 	log.Fatal("Failed to authenticate:", res.StatusCode)
 
-		log.Println(string(body))
-		log.Fatal("Failed to authenticate:", res.StatusCode)
+	// }
 
-	}
-
-	log.Fatal("Unable to authenticate to ISPSS.")
-	return "Failed."
+	// log.Fatal("Unable to authenticate to ISPSS.")
+	// return "Failed."
 
 }
