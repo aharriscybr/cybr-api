@@ -52,7 +52,7 @@ type Authn struct {
 	Tenant 		 string
 	ClientID 	 string
 	ClientSecret string
-	GrantType	 string `default:"client_credentials"`
+	GrantType	 string
 }
 
 type Token struct {

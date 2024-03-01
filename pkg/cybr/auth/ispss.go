@@ -14,7 +14,7 @@ import (
 )
 
 // Authenticate to Shared Services Identity Platform
-func HandleIdentityAuthn(a types.Authn) string {
+func GetIdentityToken(a types.Authn) (token string, result bool) {
 
 	// Get configured client
 	client := h.GetClient();
@@ -22,7 +22,9 @@ func HandleIdentityAuthn(a types.Authn) string {
 	authnUrl := "https://" + a.Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
 	method := "POST"
 
-	payload := strings.NewReader("client_id=" + url.QueryEscape(a.ClientID) + "&grant_type=" + a.GrantType + "&client_secret=" + a.ClientSecret)
+	payload := strings.NewReader("client_id=" + url.QueryEscape(a.ClientID) + "&grant_type=client_credentials&client_secret=" + a.ClientSecret)
+
+	log.Printf("Attempting to authenticate %s to %s", a.ClientID, authnUrl)
 
 	req, err := http.NewRequest(method, authnUrl, payload)
 	if err != nil {
@@ -57,7 +59,7 @@ func HandleIdentityAuthn(a types.Authn) string {
 			log.Fatal(jsonError)
 
 		}
-		return string(authzToken.Access_token)
+		return string(authzToken.Access_token), true
 
 	} else {
 
@@ -66,7 +68,6 @@ func HandleIdentityAuthn(a types.Authn) string {
 
 	}
 
-	log.Fatal("Unable to authenticate to Shared Services.")
-	return "false"
+	return "Unable to authenticate to Shared Services.", false
 
 }
