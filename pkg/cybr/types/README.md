@@ -9,10 +9,10 @@ Declare new function returning the **struct** and define the permissions in the 
     func NewType(utype string, u string) ([]byte, error) {
 
 	Perm := Permission {
-	UseAccounts:							true,
-	RetrieveAccounts:						true,
-	ListAccounts:							true,
-	AccessWithoutConfirmation:				true,
+        UseAccounts:    true,
+        RetrieveAccounts:   true,
+        ListAccounts:   true,
+        AccessWithoutConfirmation:  true,
 	}
 
 	userBlock := Member {
