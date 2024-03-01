@@ -107,7 +107,7 @@ func FullAdmin(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, nil
+	return thisBlock, err
 
 }
 
@@ -132,7 +132,7 @@ func ReadOnly(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, nil
+	return thisBlock, err
 
 }
 
@@ -144,6 +144,8 @@ func Approver(UserType string, User string) ([]byte, error) {
 	UseAccounts:							true,
 	RetrieveAccounts:						true,
 	ListAccounts:							true,
+	ViewSafeMembers:						true,
+	ManageSafeMembers:						true,
 	}
 
 	userBlock := Member {
@@ -157,7 +159,7 @@ func Approver(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, nil
+	return thisBlock, err
 
 }
 
@@ -194,7 +196,7 @@ func Manager(UserType string, User string) ([]byte, error)  {
 		log.Fatal(err)
 	}
 
-	return thisBlock, nil
+	return thisBlock, err
 
 }
 
@@ -220,7 +222,7 @@ func ConjurSync(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, nil
+	return thisBlock, err
 
 }
 
@@ -246,6 +248,6 @@ func SecretsHub(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, nil
+	return thisBlock, err
 
 }

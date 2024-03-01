@@ -11,7 +11,7 @@ import (
 func main() {
 	
 	// todo
-	SHUser, err := types.FullAdmin("user", "andrew");
+	SHUser, err := types.Approver("user", "andrew");
 	if err != nil {
 		log.Fatal(err)
 	}
