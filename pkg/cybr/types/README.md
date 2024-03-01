@@ -6,7 +6,7 @@
 
 Declare new function returning the **struct** and define the permissions in the **Perm** section
 
-    func NewType(utype string, u string) ([]byte, error) {
+    func NewType(UserType string, User string) ([]byte, error) {
 
 	Perm := Permission {
         UseAccounts:    true,

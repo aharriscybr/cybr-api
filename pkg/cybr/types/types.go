@@ -69,7 +69,7 @@ type Token struct {
 
 // Get Full Administrator Permissions
 // intakes a user type string and user string to bundle permissions
-func FullAdmin(utype string, u string) ([]byte, error) {
+func FullAdmin(UserType string, User string) ([]byte, error) {
 
 	Perm := Permission {
 	ManageSafe:								true,
@@ -97,8 +97,8 @@ func FullAdmin(utype string, u string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: u,
-		MemberType: utype,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
@@ -113,7 +113,7 @@ func FullAdmin(utype string, u string) ([]byte, error) {
 
 // Get Read Only Permissions
 // intakes a user type string and user string to bundle permissions
-func ReadOnly(utype string, u string) ([]byte, error) {
+func ReadOnly(UserType string, User string) ([]byte, error) {
 
 	Perm := Permission {
 	UseAccounts:							true,
@@ -122,8 +122,8 @@ func ReadOnly(utype string, u string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: u,
-		MemberType: utype,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
@@ -138,7 +138,7 @@ func ReadOnly(utype string, u string) ([]byte, error) {
 
 // Get Approver Permissions
 // intakes a user type string and user string to bundle permissions
-func Approver(utype string, u string) ([]byte, error) {
+func Approver(UserType string, User string) ([]byte, error) {
 
 	Perm := Permission {
 	UseAccounts:							true,
@@ -147,8 +147,8 @@ func Approver(utype string, u string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: u,
-		MemberType: utype,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
@@ -163,7 +163,7 @@ func Approver(utype string, u string) ([]byte, error) {
 
 // Get Safe Manager Permissions
 // intakes a user type string and user string to bundle permissions
-func Manager(utype string, u string) ([]byte, error)  {
+func Manager(UserType string, User string) ([]byte, error)  {
 
 	Perm := Permission {
 	ManageSafeMembers:						true,
@@ -184,8 +184,8 @@ func Manager(utype string, u string) ([]byte, error)  {
 	}
 
 	userBlock := Member {
-		Member: u,
-		MemberType: utype,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
@@ -200,7 +200,7 @@ func Manager(utype string, u string) ([]byte, error)  {
 
 // Get Conjur Component User Permissions
 // intakes a user type string and user string to bundle permissions
-func ConjurSync(utype string, u string) ([]byte, error) {
+func ConjurSync(UserType string, User string) ([]byte, error) {
 
 	Perm := Permission {
 	UseAccounts:							true,
@@ -210,8 +210,8 @@ func ConjurSync(utype string, u string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: u,
-		MemberType: utype,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
@@ -226,7 +226,7 @@ func ConjurSync(utype string, u string) ([]byte, error) {
 
 // Get Secrets Hub Component User Permissions
 // intakes a user type string and user string to bundle permissions
-func SecretsHub(utype string, u string) ([]byte, error) {
+func SecretsHub(UserType string, User string) ([]byte, error) {
 
 	Perm := Permission {
 	ViewSafeMembers:						true,
@@ -236,8 +236,8 @@ func SecretsHub(utype string, u string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: u,
-		MemberType: utype,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
