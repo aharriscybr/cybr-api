@@ -14,7 +14,7 @@ import (
 )
 
 // Authenticate to Shared Services Identity Platform
-func GetIdentityToken(a types.Authn) (token string, result bool) {
+func GetIdentityToken(a types.Authn) (token string, result bool, err error) {
 
 	// Get configured client
 	client := h.GetClient();
@@ -59,15 +59,15 @@ func GetIdentityToken(a types.Authn) (token string, result bool) {
 			log.Fatal(jsonError)
 
 		}
-		return string(authzToken.Access_token), true
+		return string(authzToken.Access_token), true, nil
 
 	} else {
 
 		log.Println(string(body))
 		log.Fatal("Failed to authenticate:", res.StatusCode)
 
-	}
+		return "Unable to authenticate to Shared Services.", false, err
 
-	return "Unable to authenticate to Shared Services.", false
+	}
 
 }

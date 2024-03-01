@@ -22,9 +22,9 @@ func main() {
 		ClientSecret: "Apple-Banana-Computer12",
 	}
 
-	token, result := auth.GetIdentityToken(session)
+	token, result, err := auth.GetIdentityToken(session)
 	if !result {
-		log.Fatal(result)
+		log.Fatal(err)
 	}
 
 	log.Printf("%s", token)
