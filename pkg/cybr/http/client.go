@@ -6,7 +6,7 @@ import (
 )
 
 
-func httpClient() *http.Client {
+func GetClient() *http.Client {
 
 	c := &http.Client{
 
