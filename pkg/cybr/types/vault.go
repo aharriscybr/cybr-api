@@ -201,8 +201,7 @@ func Manager(UserType string, User string) ([]byte, error)  {
 }
 
 // Get Conjur Component User Permissions
-// intakes a user type string and user string to bundle permissions
-func ConjurSync(UserType string, User string) ([]byte, error) {
+func ConjurSync() ([]byte, error) {
 
 	Perm := Permission {
 	UseAccounts:							true,
@@ -212,8 +211,8 @@ func ConjurSync(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: "ConjurSync",
+		MemberType: "User",
 		Perm: Perm,
 	}
 
@@ -227,8 +226,7 @@ func ConjurSync(UserType string, User string) ([]byte, error) {
 }
 
 // Get Secrets Hub Component User Permissions
-// intakes a user type string and user string to bundle permissions
-func SecretsHub(UserType string, User string) ([]byte, error) {
+func SecretsHub() ([]byte, error) {
 
 	Perm := Permission {
 	ViewSafeMembers:						true,
@@ -238,8 +236,8 @@ func SecretsHub(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: "SecretsHub",
+		MemberType: "User",
 		Perm: Perm,
 	}
 
