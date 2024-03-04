@@ -15,7 +15,7 @@ import (
 
 // Authenticate to Shared Services Identity Platform
 // This retrieves an authentication token for use within Privilege Cloud
-func GetIdentityToken(a *types.Authn) (token string, result bool, err error) {
+func GetIdentityToken(a *types.CloudConfig) (token string, result bool, err error) {
 
 	// Get configured client
 	client := h.GetClient();
