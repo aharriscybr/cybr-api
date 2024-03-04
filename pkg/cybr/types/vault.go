@@ -48,17 +48,49 @@ type Member struct {
 
 // Shared Services Structs
 
-type Authn struct {
-	Tenant 		 string
-	ClientID 	 string
-	ClientSecret string
-	GrantType	 string
+type CloudConfig struct {
+	Tenant 		 string // Shared Services Tenant
+	ClientID 	 string // Email address of onboarding services account
+	ClientSecret string // Related password to onboarding services account
+	Domain		 string // Base domain for privilege cloud
 }
 
 type Token struct {
 	Access_token string `json:"access_token"`
 	Token_type   string `json:"token_type"`
 	Expires_in   int    `json:"expires_in"`
+}
+
+type Credential struct {
+
+	Name		string `json:"name"` // Custom Account Name of the credential
+	Address 	string `json:"address"` // Address of where the credential is used
+	UserName 	string `json:"userName"` // Username value
+	Platform	string `json:"platformId"` // Required: Management platform
+	SafeName    string `json:"safeName"` // Required: Target Safe
+	SecretType	string `json:"secretType"` // Type of secret (use password)
+	Secret		string `json:"secret"` // Password Value
+	SecretMgmt  SecretManagement `json:"secretManagement"`
+	Props		AccountProps `json:"platformAccountProperties"`
+}
+
+type AccountProps struct {
+	Port   string `json:"port"`
+	DBName string `json:"database"`
+}
+
+type SecretManagement struct {
+	AutomaticManagement bool `json:"automaticManagementEnabled"`
+	ManualManagementReason string `json:"manualManagementReason"`
+}
+
+type RemoteAccess struct {
+	RemoteMachines 	  string `json:"remoteMachines"`
+	RestrictToMachine string `json:"accessRestrictedToRemoteMachines"` 
+}
+
+type Safe struct {
+
 }
 
 /*
@@ -201,8 +233,7 @@ func Manager(UserType string, User string) ([]byte, error)  {
 }
 
 // Get Conjur Component User Permissions
-// intakes a user type string and user string to bundle permissions
-func ConjurSync(UserType string, User string) ([]byte, error) {
+func ConjurSync() ([]byte, error) {
 
 	Perm := Permission {
 	UseAccounts:							true,
@@ -212,8 +243,8 @@ func ConjurSync(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: "ConjurSync",
+		MemberType: "User",
 		Perm: Perm,
 	}
 
@@ -227,8 +258,7 @@ func ConjurSync(UserType string, User string) ([]byte, error) {
 }
 
 // Get Secrets Hub Component User Permissions
-// intakes a user type string and user string to bundle permissions
-func SecretsHub(UserType string, User string) ([]byte, error) {
+func SecretsHub() ([]byte, error) {
 
 	Perm := Permission {
 	ViewSafeMembers:						true,
@@ -238,8 +268,8 @@ func SecretsHub(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: "SecretsHub",
+		MemberType: "User",
 		Perm: Perm,
 	}
 
@@ -250,4 +280,17 @@ func SecretsHub(UserType string, User string) ([]byte, error) {
 
 	return thisBlock, err
 
+}
+
+// Build credential object for onboarding via API
+func Cred(cred *Credential) ([]byte, error) {
+
+	d := &cred;
+
+	jsonData, err := json.Marshal(d)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return jsonData, err
 }

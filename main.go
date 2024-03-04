@@ -2,7 +2,5 @@ package main
 
 
 func main() {
-	
-	// todo
-
+	// nothing
 }
