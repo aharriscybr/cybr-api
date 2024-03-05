@@ -1,5 +1,6 @@
 package auth
 
+// git sucks
 import (
 	"encoding/json"
 	"io"
