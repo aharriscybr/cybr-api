@@ -7,14 +7,13 @@ import (
 	"net/http"
 
 	"github.com/aharriscybr/cybr-api/pkg/cybr/auth"
-	c "github.com/aharriscybr/cybr-api/pkg/cybr/http"
 	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 // Onboard Credentials into safe
 func Onboard(cred *types.Credential, conf *types.CloudConfig) (bool, error) {
 
-	client := c.GetClient()
+	client := &http.Client{}
 
 	api_uri := "https://" + conf.Domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts"
 	method := "POST"
