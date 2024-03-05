@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	// API Includes
-	h "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+
 	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
@@ -18,7 +19,7 @@ import (
 func GetIdentityToken(a *types.CloudConfig) (token string, result bool, err error) {
 
 	// Get configured client
-	client := h.GetClient();
+	client := &http.Client{Timeout: 10 * time.Second}
 
 	authnUrl := "https://" + a.Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
 	method := "POST"

@@ -53,6 +53,7 @@ type CloudConfig struct {
 	ClientID 	 string // Email address of onboarding services account
 	ClientSecret string // Related password to onboarding services account
 	Domain		 string // Base domain for privilege cloud
+	Action  	 string // Action to determine switch of domain
 }
 
 type Token struct {
