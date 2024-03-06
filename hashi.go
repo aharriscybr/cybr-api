@@ -1,4 +1,4 @@
-package cyberarkapi_client
+package cyberark_hashiimpl
 
 import (
 	"log"
