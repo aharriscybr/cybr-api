@@ -5,11 +5,11 @@ import (
 	"net/http"
 
 	auth "github.com/aharriscybr/cybr-api/pkg/cybr/auth"
+	client "github.com/aharriscybr/cybr-api/pkg/cybr/http"
 	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 type Client struct {
-	IdentityAPI string
 	VaultAPI string
 	AuthToken string
 	HTTPClient *http.Client
@@ -18,7 +18,7 @@ type Client struct {
 
 func NewClient(tenant *string, domain *string, clientid *string, clientsecret *string) (*Client, error) {
 
-	hclient := GetClient()
+	hclient := client.GetClient()
 
 	if tenant == nil || domain == nil || clientid == nil || clientsecret == nil {
 		return nil, nil
