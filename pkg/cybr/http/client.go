@@ -1,4 +1,4 @@
-package cyberarkapiclient
+package cyberarkapi_client
 
 import (
 	"net/http"

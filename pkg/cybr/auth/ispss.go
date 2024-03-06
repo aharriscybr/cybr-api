@@ -10,7 +10,7 @@ import (
 
 	// API Includes
 
-	hClient "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+	client "github.com/aharriscybr/cybr-api/pkg/cybr/http"
 	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
@@ -19,14 +19,14 @@ import (
 func GetIdentityToken(a *types.CloudConfig) (token string, result bool, err error) {
 
 	// Get configured client
-	client := hClient.GetClient()
+	client := client.GetClient()
 
-	authnUrl := "https://" + a.Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
+	authnUrl := "https://" + *a.Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
 	method := "POST"
 
-	payload := strings.NewReader("client_id=" + url.QueryEscape(a.ClientID) + "&grant_type=client_credentials&client_secret=" + a.ClientSecret)
+	payload := strings.NewReader("client_id=" + url.QueryEscape(*a.ClientID) + "&grant_type=client_credentials&client_secret=" + *a.ClientSecret)
 
-	log.Printf("Attempting to authenticate %s to %s", a.ClientID, authnUrl)
+	log.Printf("Attempting to authenticate %s to %s", *a.ClientID, authnUrl)
 
 	req, err := http.NewRequest(method, authnUrl, payload)
 	if err != nil {
