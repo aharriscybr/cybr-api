@@ -38,6 +38,7 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 	token, result, err := auth.GetIdentityToken(&cred)
 	if err != nil {
 		log.Println(err)
+		return &c, err
 	}
 
 	if result {
