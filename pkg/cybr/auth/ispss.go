@@ -1,6 +1,5 @@
-package auth
+package cyberarkapi_auth
 
-// git sucks
 import (
 	"encoding/json"
 	"io"
@@ -8,11 +7,11 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"time"
 
 	// API Includes
 
-	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
+	hClient "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 // Authenticate to Shared Services Identity Platform
@@ -20,7 +19,7 @@ import (
 func GetIdentityToken(a *types.CloudConfig) (token string, result bool, err error) {
 
 	// Get configured client
-	client := &http.Client{Timeout: 10 * time.Second}
+	client := hClient.GetClient()
 
 	authnUrl := "https://" + a.Tenant + ".id.cyberark.cloud/oauth2/platformtoken"
 	method := "POST"

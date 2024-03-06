@@ -1,4 +1,4 @@
-package account
+package cyberarkapi_account
 
 import (
 	"bytes"
@@ -6,14 +6,15 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/aharriscybr/cybr-api/pkg/cybr/auth"
-	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
+	auth "github.com/aharriscybr/cybr-api/pkg/cybr/auth"
+	hClient "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 // Onboard Credentials into safe
 func Onboard(cred *types.Credential, conf *types.CloudConfig) (bool, error) {
 
-	client := &http.Client{}
+	client := hClient.GetClient()
 
 	api_uri := "https://" + conf.Domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts"
 	method := "POST"
@@ -34,7 +35,7 @@ func Onboard(cred *types.Credential, conf *types.CloudConfig) (bool, error) {
 		return false, e
 	}
 	if !result {
-		log.Printf("Unhandled error %d", result)
+		log.Printf("Unhandled error")
 	}
 	
 	bearer := "Bearer " + token
