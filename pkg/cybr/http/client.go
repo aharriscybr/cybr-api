@@ -1,4 +1,4 @@
-package hClient
+package cyberarkapiclient
 
 import (
 	"net/http"

@@ -1,4 +1,4 @@
-package auth
+package cyberarkapi_auth
 
 import (
 	"encoding/json"
@@ -11,7 +11,7 @@ import (
 	// API Includes
 
 	hClient "github.com/aharriscybr/cybr-api/pkg/cybr/http"
-	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
+	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 // Authenticate to Shared Services Identity Platform

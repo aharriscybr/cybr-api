@@ -1,4 +1,4 @@
-package account
+package cyberarkapi_account
 
 import (
 	"bytes"
@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/aharriscybr/cybr-api/pkg/cybr/auth"
+	auth "github.com/aharriscybr/cybr-api/pkg/cybr/auth"
 	hClient "github.com/aharriscybr/cybr-api/pkg/cybr/http"
-	"github.com/aharriscybr/cybr-api/pkg/cybr/types"
+	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 // Onboard Credentials into safe
