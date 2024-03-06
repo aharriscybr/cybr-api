@@ -16,7 +16,7 @@ func Onboard(cred *types.Credential, conf *types.CloudConfig) (bool, error) {
 
 	client := hClient.GetClient()
 
-	api_uri := "https://" + conf.Domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts"
+	api_uri := "https://" + *conf.Domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts"
 	method := "POST"
 
 	body, e := types.Cred(cred)
@@ -31,7 +31,7 @@ func Onboard(cred *types.Credential, conf *types.CloudConfig) (bool, error) {
 
 	token, result, e := auth.GetIdentityToken(conf)
 	if e != nil {
-		log.Printf("Unable to Authenticate to %s", conf.Tenant)
+		log.Printf("Unable to Authenticate to %s", *conf.Tenant)
 		return false, e
 	}
 	if !result {
