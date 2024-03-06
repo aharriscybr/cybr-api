@@ -10,12 +10,17 @@ import (
 )
 
 type Client struct {
-	VaultAPI string
-	AuthToken string
+	VaultAPI *string
+	AuthToken *string
 	HTTPClient *http.Client
 }
 
-
+// Tenant, Domain, ClientID, ClientSecret - Returns struct client:
+// // Client {
+// 	VaultAPI *string
+// 	AuthToken *string
+// 	HTTPClient *http.Client
+// }
 func NewClient(tenant *string, domain *string, clientid *string, clientsecret *string) (*Client, error) {
 
 	hclient := client.GetClient()
@@ -45,7 +50,7 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 		log.Println("Successfully authenticated to shared services.")
 
-		c.AuthToken = token
+		c.AuthToken = &token
 
 		return &c, nil
 	}
