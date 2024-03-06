@@ -44,11 +44,10 @@ type Member struct {
 // Shared Services Structs
 
 type CloudConfig struct {
-	Tenant 		 *string // Shared Services Tenant
-	ClientID 	 *string // Email address of onboarding services account
-	ClientSecret *string // Related password to onboarding services account
-	Domain		 *string // Base domain for privilege cloud
-	Action  	 *string // Action to determine switch of domain
+	Tenant 		 *string `tfsdk:"tenant"` // Shared Services Tenant
+	ClientID 	 *string `tfsdk:"clientid"` // Email address of onboarding services account
+	ClientSecret *string `tfsdk:"clientsecret"` // Related password to onboarding services account
+	Domain		 *string `tfsdk:"domain"` // Base domain for privilege cloud
 }
 
 type Token struct {
