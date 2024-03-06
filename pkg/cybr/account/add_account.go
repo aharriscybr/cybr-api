@@ -35,7 +35,7 @@ func Onboard(cred *types.Credential, conf *types.CloudConfig) (bool, error) {
 		return false, e
 	}
 	if !result {
-		log.Printf("Unhandled error %d", result)
+		log.Printf("Unhandled error")
 	}
 	
 	bearer := "Bearer " + token
