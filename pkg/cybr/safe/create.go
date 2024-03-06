@@ -1,1 +1,1 @@
-package safe
+package cyberarkapi_safe
