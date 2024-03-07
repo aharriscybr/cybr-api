@@ -50,7 +50,7 @@ func Onboard(cred *types.Credential, conf *types.CloudConfig) (bool, error) {
 
 	if response.StatusCode == 201 {
 
-		log.Printf("Onboarded %s to %s", cred.Name, cred.SafeName)
+		log.Printf("Onboarded %s to %s", *cred.Name, *cred.SafeName)
 
 	} else {
 		log.Println("Your Credential was not onboarded, the vault rejected your request: ")
