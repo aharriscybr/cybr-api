@@ -41,9 +41,16 @@ func FullAdmin(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: &User,
+		MemberType: &UserType,
 		Perm: Perm,
+	}
+
+	if &User == nil || &UserType == nil {
+
+		log.Fatal("User or User Type is null")
+		return nil, nil
+		
 	}
 
 	thisBlock, err := json.Marshal(userBlock)
@@ -65,9 +72,16 @@ func ReadOnly(UserType string, User string) ([]byte, error) {
 	ListAccounts:							true,
 	}
 
+	if &User == nil || &UserType == nil {
+
+		log.Fatal("User or User Type is null")
+		return nil, nil
+		
+	}
+
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: &User,
+		MemberType: &UserType,
 		Perm: Perm,
 	}
 
@@ -92,9 +106,16 @@ func Approver(UserType string, User string) ([]byte, error) {
 	ManageSafeMembers:						true,
 	}
 
+	if &User == nil || &UserType == nil {
+
+		log.Fatal("User or User Type is null")
+		return nil, nil
+		
+	}
+
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: &User,
+		MemberType: &UserType,
 		Perm: Perm,
 	}
 
@@ -129,9 +150,16 @@ func Manager(UserType string, User string) ([]byte, error)  {
 	AccessWithoutConfirmation:				true,
 	}
 
+	if &User == nil || &UserType == nil {
+
+		log.Fatal("User or User Type is null")
+		return nil, nil
+		
+	}
+
 	userBlock := Member {
-		Member: User,
-		MemberType: UserType,
+		Member: &User,
+		MemberType: &UserType,
 		Perm: Perm,
 	}
 
@@ -154,9 +182,12 @@ func ConjurSync() ([]byte, error) {
 	AccessWithoutConfirmation:				true,
 	}
 
+	UT := "ConjurSync"
+	US := "User"
+
 	userBlock := Member {
-		Member: "ConjurSync",
-		MemberType: "User",
+		Member: &UT,
+		MemberType: &US,
 		Perm: Perm,
 	}
 
@@ -179,9 +210,12 @@ func SecretsHub() ([]byte, error) {
 	AccessWithoutConfirmation:				true,
 	}
 
+	US := "SecretsHub"
+	UT := "User"
+
 	userBlock := Member {
-		Member: "SecretsHub",
-		MemberType: "User",
+		Member: &US,
+		MemberType: &UT,
 		Perm: Perm,
 	}
 

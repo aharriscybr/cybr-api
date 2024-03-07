@@ -61,7 +61,7 @@ func GetIdentityToken(a *types.CloudConfig) (token string, result bool, err erro
 			log.Println(jsonError)
 
 		}
-		return string(authzToken.Access_token), true, nil
+		return string(*authzToken.Access_token), true, nil
 
 	} else {
 
