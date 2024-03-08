@@ -55,41 +55,13 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
-func TCreateAccount(cred *cybrtypes.Credential, authToken *string, domain *string) ([]byte, error) {
+func CreateAccount(cred *cybrtypes.Credential, authToken *string, domain *string) ([]byte, error) {
+
+	//log.Printf("Processing Account Attribute: %s", *cred.Name)
+	log.Printf("Processing Account Attribute: %s", *cred.Props.DBName)
+	log.Printf("Processing Account Attribute: %s", *cred.Props.Port)
 
 	account.Onboard(cred, authToken, domain)
 
 	return nil, nil
-}
-
-func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string, port *string, dbname *string, authToken *string, domain *string) ([]byte, error) {
-
-
-	dbProps := cybrtypes.AccountProps {
-		Port: port,
-		DBName: dbname,
-	}
-
-	newAccount := cybrtypes.Credential {
-		Name: name,
-		Address: address,
-		UserName: username,
-		Platform: platform,
-		SecretType: secrettype,
-		Secret: secret,
-		SafeName: safe,
-		Props: &dbProps,
-	}
-
-	log.Printf("Processing Account Attribute: %s", *name)
-	log.Printf("Processing Account Attribute: %s", *address)
-	log.Printf("Processing Account Attribute: %s", *username)
-	log.Printf("Processing Account Attribute: %s", *platform)
-	log.Printf("Processing Account Attribute: %s", *safe)
-	log.Printf("Processing Account Attribute: %s", *secrettype)
-
-	account.Onboard(&newAccount, authToken, domain)
-
-	return nil, nil
-
 }
