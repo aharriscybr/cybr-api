@@ -58,7 +58,7 @@ func FullAdmin(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, err
+	return thisBlock, nil
 
 }
 
@@ -90,7 +90,7 @@ func ReadOnly(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, err
+	return thisBlock, nil
 
 }
 
@@ -124,7 +124,7 @@ func Approver(UserType string, User string) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, err
+	return thisBlock, nil
 
 }
 
@@ -168,7 +168,7 @@ func Manager(UserType string, User string) ([]byte, error)  {
 		log.Fatal(err)
 	}
 
-	return thisBlock, err
+	return thisBlock, nil
 
 }
 
@@ -182,12 +182,12 @@ func ConjurSync() ([]byte, error) {
 	AccessWithoutConfirmation:				true,
 	}
 
-	UT := "ConjurSync"
-	US := "User"
+	US := "ConjurSync"
+	UT := "User"
 
 	userBlock := Member {
-		Member: &UT,
-		MemberType: &US,
+		Member: &US,
+		MemberType: &UT,
 		Perm: Perm,
 	}
 
@@ -196,7 +196,7 @@ func ConjurSync() ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, err
+	return thisBlock, nil
 
 }
 
@@ -224,19 +224,7 @@ func SecretsHub() ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	return thisBlock, err
+	return thisBlock, nil
 
 }
 
-// Build credential object for onboarding via API
-func Cred(cred *Credential) ([]byte, error) {
-
-	d := &cred;
-
-	jsonData, err := json.Marshal(d)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return jsonData, err
-}

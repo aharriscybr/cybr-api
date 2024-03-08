@@ -56,6 +56,8 @@ type Token struct {
 	Expires_in   *int    `json:"expires_in"`
 }
 
+// Vault API Structs
+
 type Credential struct {
 
 	Name		*string `json:"name"` // Custom Account Name of the credential
@@ -66,12 +68,46 @@ type Credential struct {
 	SecretType	*string `json:"secretType"` // Type of secret (use password)
 	Secret		*string `json:"secret"` // Password Value
 	SecretMgmt  SecretManagement `json:"secretManagement"`
-	Props		AccountProps `json:"platformAccountProperties"`
+	Props		*AccountProps `json:"platformAccountProperties"`
 }
 
 type AccountProps struct {
-	Port   *string `json:"port"`
-	DBName *string `json:"database"`
+
+	/*
+	* Generic - Types that map to additional platforms
+	*/
+
+	Port   *string `json:"port,omitempty"`
+
+	/*
+	* DB Handlers
+	*/
+	
+	DBName *string `json:"database,omitempty"`
+	DSN *string `json:"DSN,omitempty"`
+
+	/*
+	* AWS
+	*/
+
+	AWSKID *string `json:"AWSAccessKeyID,omitempty"`
+	AWSAccount *string `json:"AWSAccountID,omitempty"`
+	Alias *string `json:"AWSAccountAliasName,omitempty"`
+	Region *string `json:"Region,omitempty"`
+
+	/*
+	* Microsoft
+	*/
+
+	MAppID *string `json:"ApplicationID,omitempty"`
+	MAppObjectID *string `json:"ApplicationObjectID,omitempty"`
+	MKID *string `json:"KeyID,omitempty"`
+	MADID *string `json:"ActiveDirectoryID,omitempty"`
+	MDur *string `json:"Duration,omitempty"`
+	MPop *string `json:"PopulateIfNotExist,omitempty"`
+	MKeyDesc *string `json:"KeyDescription,omitempty"`
+
+	// template t *string `json:"t,omitempty"`
 }
 
 type SecretManagement struct {

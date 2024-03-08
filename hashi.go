@@ -1,4 +1,4 @@
-package cyberark_hashiimpl
+package main
 
 import (
 	"log"
@@ -7,7 +7,7 @@ import (
 	account "github.com/aharriscybr/cybr-api/pkg/cybr/account"
 	auth "github.com/aharriscybr/cybr-api/pkg/cybr/auth"
 	client "github.com/aharriscybr/cybr-api/pkg/cybr/http"
-	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
+	cybrtypes "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 type Client struct {
@@ -29,7 +29,7 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 		Domain: domain,
 	}
 
-	cred := types.CloudConfig {
+	cred := cybrtypes.CloudConfig {
 		Tenant: tenant,
 		Domain: domain,
 		ClientID: clientid,
@@ -55,17 +55,22 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
-func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string, authToken *string, domain *string) ([]byte, error) {
+func TCreateAccount(cred *cybrtypes.Credential, authToken *string, domain *string) ([]byte, error) {
 
-	port := "5432"
-	dbn  := "dbo.test"
+	account.Onboard(cred, authToken, domain)
 
-	dbProps := types.AccountProps {
-		Port: &port,
-		DBName: &dbn,
+	return nil, nil
+}
+
+func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string, port *string, dbname *string, authToken *string, domain *string) ([]byte, error) {
+
+
+	dbProps := cybrtypes.AccountProps {
+		Port: port,
+		DBName: dbname,
 	}
 
-	newAccount := types.Credential {
+	newAccount := cybrtypes.Credential {
 		Name: name,
 		Address: address,
 		UserName: username,
@@ -73,7 +78,7 @@ func CreateAccount(name *string, address *string, username *string, platform *st
 		SecretType: secrettype,
 		Secret: secret,
 		SafeName: safe,
-		Props: dbProps,
+		Props: &dbProps,
 	}
 
 	log.Printf("Processing Account Attribute: %s", *name)
