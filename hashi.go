@@ -57,6 +57,14 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string, authToken *string, domain *string) ([]byte, error) {
 
+	port := "5432"
+	dbn  := "dbo.test"
+
+	dbProps := types.AccountProps {
+		Port: &port,
+		DBName: &dbn,
+	}
+
 	newAccount := types.Credential {
 		Name: name,
 		Address: address,
@@ -65,6 +73,7 @@ func CreateAccount(name *string, address *string, username *string, platform *st
 		SecretType: secrettype,
 		Secret: secret,
 		SafeName: safe,
+		Props: dbProps,
 	}
 
 	log.Printf("Processing Account Attribute: %s", *name)
