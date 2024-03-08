@@ -56,6 +56,8 @@ type Token struct {
 	Expires_in   *int    `json:"expires_in"`
 }
 
+// Vault API Structs
+
 type Credential struct {
 
 	Name		*string `json:"name"` // Custom Account Name of the credential
