@@ -84,7 +84,7 @@ type AccountProps struct {
 	*/
 	
 	DBName *string `json:"database,omitempty"`
-	DSN *string `json:"DSN,omitempty"`
+	DSN *string `json:"dsn,omitempty"`
 
 	/*
 	* AWS
