@@ -1,4 +1,4 @@
-package cyberark_hashiimpl
+package main
 
 import (
 	"log"
@@ -55,14 +55,12 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
-func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string, authToken *string, domain *string) ([]byte, error) {
+func CreateDBAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string, port *string, dbname *string, authToken *string, domain *string) ([]byte, error) {
 
-	port := "5432"
-	dbn  := "dbo.test"
 
 	dbProps := types.AccountProps {
-		Port: &port,
-		DBName: &dbn,
+		Port: port,
+		DBName: dbname,
 	}
 
 	newAccount := types.Credential {
@@ -73,7 +71,7 @@ func CreateAccount(name *string, address *string, username *string, platform *st
 		SecretType: secrettype,
 		Secret: secret,
 		SafeName: safe,
-		Props: dbProps,
+		Props: &dbProps,
 	}
 
 	log.Printf("Processing Account Attribute: %s", *name)

@@ -7,18 +7,18 @@ import (
 	"net/http"
 
 	hClient "github.com/aharriscybr/cybr-api/pkg/cybr/http"
-	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
+	cybrtypes "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 // Onboard Credentials into safe
-func Onboard(cred *types.Credential, token *string, domain *string) (bool, error) {
+func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, error) {
 
 	client := hClient.GetClient()
 
 	api_uri := "https://" + *domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts"
 	method := "POST"
 
-	body, e := types.Cred(cred)
+	body, e := cybrtypes.Cred(cred)
 	if e != nil {
 		log.Panicln("Unable to format Credential object.")
 	}
@@ -35,7 +35,7 @@ func Onboard(cred *types.Credential, token *string, domain *string) (bool, error
 	response, err := client.Do(req)
 	if err != nil {
 		log.Println("Unhandled error onboarding credential.")
-		return false, e
+		return false, err
 	}
 
 	if response.StatusCode == 201 {
@@ -56,3 +56,7 @@ func Onboard(cred *types.Credential, token *string, domain *string) (bool, error
 
 }
 
+func Delete() (bool, error) {
+
+	return false, nil
+}

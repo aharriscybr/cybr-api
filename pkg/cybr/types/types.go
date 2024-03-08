@@ -182,12 +182,12 @@ func ConjurSync() ([]byte, error) {
 	AccessWithoutConfirmation:				true,
 	}
 
-	UT := "ConjurSync"
-	US := "User"
+	US := "ConjurSync"
+	UT := "User"
 
 	userBlock := Member {
-		Member: &UT,
-		MemberType: &US,
+		Member: &US,
+		MemberType: &UT,
 		Perm: Perm,
 	}
 
