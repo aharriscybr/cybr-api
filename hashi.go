@@ -57,17 +57,25 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
-// func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string) ([]byte, error) {
+func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string) ([]byte, error) {
 
-// 	newAccount := types.Credential {
-// 		Name: name,
-// 		Address: address,
-// 		UserName: username,
-// 		Platform: platform,
-// 		SecretType: secrettype,
-// 		Secret: secret,
-// 	}
+	// newAccount := types.Credential {
+	// 	Name: name,
+	// 	Address: address,
+	// 	UserName: username,
+	// 	Platform: platform,
+	// 	SecretType: secrettype,
+	// 	Secret: secret,
+	// }
 
-// 	account.Onboard(newAccount, )
+	log.Printf("Attribute: %s", *name)
+	log.Printf("Attribute: %s", *address)
+	log.Printf("Attribute: %s", *username)
+	log.Printf("Attribute: %s", *platform)
+	log.Printf("Attribute: %s", *safe)
+	log.Printf("Attribute: %s", *secrettype)
+	log.Printf("Attribute: %s", *secret)
 
-// }
+	return nil, nil
+
+}
