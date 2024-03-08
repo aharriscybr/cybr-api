@@ -23,6 +23,8 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, e
 		log.Panicln("Unable to format Credential object.")
 	}
 
+	log.Println(string(body))
+
 	req, e := http.NewRequest(method, api_uri, bytes.NewBuffer(body))
 	if e != nil {
 		log.Fatal("Unable to construct api request.")
@@ -50,6 +52,7 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, e
 			log.Fatal(err)
 		}
 		log.Println(string(r))
+		return false, err
 	}
 
 	return true, nil
