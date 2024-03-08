@@ -64,6 +64,7 @@ func CreateAccount(name *string, address *string, username *string, platform *st
 		Platform: platform,
 		SecretType: secrettype,
 		Secret: secret,
+		SafeName: safe,
 	}
 
 	log.Printf("Processing Account Attribute: %s", *name)
