@@ -1,4 +1,4 @@
-package main
+package cyberarkapi_hashiimpl
 
 import (
 	"log"
