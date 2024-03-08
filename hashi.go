@@ -4,15 +4,16 @@ import (
 	"log"
 	"net/http"
 
+	account "github.com/aharriscybr/cybr-api/pkg/cybr/account"
 	auth "github.com/aharriscybr/cybr-api/pkg/cybr/auth"
 	client "github.com/aharriscybr/cybr-api/pkg/cybr/http"
 	types "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
 type Client struct {
-	VaultAPI *string
 	AuthToken *string
 	HTTPClient *http.Client
+	Domain *string
 }
 
 func NewClient(tenant *string, domain *string, clientid *string, clientsecret *string) (*Client, error) {
@@ -25,6 +26,7 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 	c := Client {
 		HTTPClient: hclient,
+		Domain: domain,
 	}
 
 	cred := types.CloudConfig {
@@ -33,10 +35,6 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 		ClientID: clientid,
 		ClientSecret: clientsecret,
 	}
-	log.Printf("Attribute: %s", *tenant)
-	log.Printf("Attribute: %s", *domain)
-	log.Printf("Attribute: %s", *clientid)
-	log.Printf("Attribute: %s", *clientsecret)
 
 	token, result, err := auth.GetIdentityToken(&cred)
 	if err != nil {
@@ -57,24 +55,25 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
-func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string) ([]byte, error) {
+func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string, authToken *string, domain *string) ([]byte, error) {
 
-	// newAccount := types.Credential {
-	// 	Name: name,
-	// 	Address: address,
-	// 	UserName: username,
-	// 	Platform: platform,
-	// 	SecretType: secrettype,
-	// 	Secret: secret,
-	// }
+	newAccount := types.Credential {
+		Name: name,
+		Address: address,
+		UserName: username,
+		Platform: platform,
+		SecretType: secrettype,
+		Secret: secret,
+	}
 
-	log.Printf("Attribute: %s", *name)
-	log.Printf("Attribute: %s", *address)
-	log.Printf("Attribute: %s", *username)
-	log.Printf("Attribute: %s", *platform)
-	log.Printf("Attribute: %s", *safe)
-	log.Printf("Attribute: %s", *secrettype)
-	log.Printf("Attribute: %s", *secret)
+	log.Printf("Processing Account Attribute: %s", *name)
+	log.Printf("Processing Account Attribute: %s", *address)
+	log.Printf("Processing Account Attribute: %s", *username)
+	log.Printf("Processing Account Attribute: %s", *platform)
+	log.Printf("Processing Account Attribute: %s", *safe)
+	log.Printf("Processing Account Attribute: %s", *secrettype)
+
+	account.Onboard(&newAccount, authToken, domain)
 
 	return nil, nil
 
