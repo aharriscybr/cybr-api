@@ -55,16 +55,11 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
-func CreateAccount(cred *cybrtypes.Credential, authToken *string, domain *string) ([]byte, error) {
+func CreateAccount(c *cybrtypes.Credential, authToken *string, domain *string) ([]byte, error) {
 
-	// dbn := cred.Props.DBName
-	// p := cred.Props.Port
+	log.Println(cybrtypes.Cred(c))
 
-	//log.Printf("Processing Account Attribute: %s", *cred.Name)
-	// log.Printf("Processing Account Attribute: %s", *dbn)
-	// log.Printf("Processing Account Attribute: %s", *p)
-
-	account.Onboard(cred, authToken, domain)
+	account.Onboard(c, authToken, domain)
 
 	return nil, nil
 }
