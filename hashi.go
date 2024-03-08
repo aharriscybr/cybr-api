@@ -15,12 +15,6 @@ type Client struct {
 	HTTPClient *http.Client
 }
 
-// Tenant, Domain, ClientID, ClientSecret - Returns struct client:
-// // Client {
-// 	VaultAPI *string
-// 	AuthToken *string
-// 	HTTPClient *http.Client
-// }
 func NewClient(tenant *string, domain *string, clientid *string, clientsecret *string) (*Client, error) {
 
 	hclient := client.GetClient()
@@ -39,6 +33,10 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 		ClientID: clientid,
 		ClientSecret: clientsecret,
 	}
+	log.Printf("Attribute: %s", *tenant)
+	log.Printf("Attribute: %s", *domain)
+	log.Printf("Attribute: %s", *clientid)
+	log.Printf("Attribute: %s", *clientsecret)
 
 	token, result, err := auth.GetIdentityToken(&cred)
 	if err != nil {
@@ -58,3 +56,18 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 	return &c, nil
 
 }
+
+// func CreateAccount(name *string, address *string, username *string, platform *string, safe *string, secrettype *string, secret *string) ([]byte, error) {
+
+// 	newAccount := types.Credential {
+// 		Name: name,
+// 		Address: address,
+// 		UserName: username,
+// 		Platform: platform,
+// 		SecretType: secrettype,
+// 		Secret: secret,
+// 	}
+
+// 	account.Onboard(newAccount, )
+
+// }
