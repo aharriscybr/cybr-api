@@ -74,18 +74,18 @@ func CreateAccount(c *cybrtypes.Credential, authToken *string, domain *string) (
 }
 
 // Interface to Delete Account
-func RemoveAccount(id *string, authToken *string, domain *string) (bool, error) {
+func RemoveAccount(id *string, authToken *string, domain *string) (error) {
 
 	result, err := account.Remove(id, authToken, domain)
 	if err != nil {
 		
-		return false, nil
+		return err
 	}
 
 	if result {
-		return result, nil
+		return nil
+	} else {
+		return nil
 	}
-
-	return false, nil
 
 }
