@@ -113,6 +113,7 @@ type AccountProps struct {
 type SecretManagement struct {
 	AutomaticManagement bool `json:"automaticManagementEnabled"`
 	ManualManagementReason *string `json:"manualManagementReason"`
+	ModifiedTime *int `json:"createdTime,omitempty"`
 }
 
 type RemoteAccess struct {
@@ -122,8 +123,8 @@ type RemoteAccess struct {
 
 type CredentialResponse struct {
 	CredID *string `json:"id,omitempty"`
-	CreationTime *string `json:"lastModifiedTime,omitempty"`
-	ModifiedTime *string `json:"createdTime,omitempty"`
+	CreationTime *int `json:"lastModifiedTime,omitempty"`
+	SM *SecretManagement `json:"secretManagement"`
 }
 
 type Safe struct {
