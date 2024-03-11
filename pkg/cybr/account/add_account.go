@@ -2,6 +2,7 @@ package cyberarkapi_account
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -40,13 +41,19 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, e
 
 	if response.StatusCode == 201 {
 
-		text, err := io.ReadAll(response.Body)
+		responseData := []cybrtypes.CredentialResponse{}
+
+		body, err := io.ReadAll(response.Body)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("Unable to process response.")
 		}
 
+		json.Unmarshal(body, &responseData)
+
+		log.Println(responseData)
+
 		log.Printf("Onboarded %s to %s", *cred.Name, *cred.SafeName)
-		log.Println(string(text))
+
 
 	} else {
 		log.Println("Your Credential was not onboarded, the vault rejected your request: ")

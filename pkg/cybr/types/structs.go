@@ -120,6 +120,12 @@ type RemoteAccess struct {
 	RestrictToMachine *string `json:"accessRestrictedToRemoteMachines"` 
 }
 
+type CredentialResponse struct {
+	CredID *string `json:"id,omitempty"`
+	CreationTime *string `json:"lastModifiedTime,omitempty"`
+	ModifiedTime *string `json:"createdTime,omitempty"`
+}
+
 type Safe struct {
 
 }
