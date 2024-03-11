@@ -23,8 +23,6 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, e
 		log.Panicln("Unable to format Credential object.")
 	}
 
-	log.Println(string(body))
-
 	req, e := http.NewRequest(method, api_uri, bytes.NewBuffer(body))
 	if e != nil {
 		log.Fatal("Unable to construct api request.")
@@ -42,7 +40,13 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, e
 
 	if response.StatusCode == 201 {
 
+		text, err := io.ReadAll(response.Request.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		log.Printf("Onboarded %s to %s", *cred.Name, *cred.SafeName)
+		log.Println(string(text))
 
 	} else {
 		log.Println("Your Credential was not onboarded, the vault rejected your request: ")
@@ -59,7 +63,17 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, e
 
 }
 
-func Delete() (bool, error) {
+func Get() (bool, error) {
+
+	return false, nil
+}
+
+func Update() (bool, error) {
+
+	return false, nil
+}
+
+func Delete(cred *cybrtypes.Credential, token *string, domain *string) (bool, error) {
 
 	return false, nil
 }
