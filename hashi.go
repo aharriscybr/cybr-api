@@ -16,6 +16,8 @@ type Client struct {
 	Domain *string
 }
 
+
+// Register new Authentication session and client details
 func NewClient(tenant *string, domain *string, clientid *string, clientsecret *string) (*Client, error) {
 
 	hclient := client.GetClient()
@@ -55,11 +57,35 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
-func CreateAccount(c *cybrtypes.Credential, authToken *string, domain *string) ([]byte, error) {
+// Interface to Creation of account
+func CreateAccount(c *cybrtypes.Credential, authToken *string, domain *string) (string, error) {
 
-	log.Println(cybrtypes.Cred(c))
 
-	account.Onboard(c, authToken, domain)
+	id, err := account.Onboard(c, authToken, domain)
+	if err != nil {
 
-	return nil, nil
+		log.Println("Unable to onboard account, please check information and try again.")
+
+		return "", nil
+
+	}
+
+	return id, nil
+}
+
+// Interface to Delete Account
+func RemoveAccount(id *string, authToken *string, domain *string) (bool, error) {
+
+	result, err := account.Remove(id, authToken, domain)
+	if err != nil {
+		
+		return false, nil
+	}
+
+	if result {
+		return result, nil
+	}
+
+	return false, nil
+
 }
