@@ -40,7 +40,7 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (bool, e
 
 	if response.StatusCode == 201 {
 
-		text, err := io.ReadAll(response.Request.Body)
+		text, err := io.ReadAll(response.Body)
 		if err != nil {
 			log.Fatal(err)
 		}
