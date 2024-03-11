@@ -15,7 +15,5 @@ func Cred(cred *Credential) ([]byte, error) {
 		log.Fatal(err)
 	}
 
-	log.Println(string(jsonData))
-
 	return jsonData, nil
 }
