@@ -1,4 +1,4 @@
-package cybrapi_hashiimpl
+package cyberarkapi_hashiimpl
 
 import (
 	"log"
