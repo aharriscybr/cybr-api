@@ -83,8 +83,11 @@ func RemoveAccount(id *string, authToken *string, domain *string) (error) {
 	}
 
 	if result {
+
 		return nil
+
 	} else {
+		
 		return nil
 	}
 
