@@ -114,8 +114,8 @@ type AccountProps struct {
 type SecretManagement struct {
 	AutomaticManagement *bool `json:"automaticManagementEnabled"`
 	ManualManagementReason *string `json:"manualManagementReason"`
-	ModifiedTime *int64 `json:"createdTime,omitempty"`
-	Status *int64 `json:"status,omitempty"`
+	ModifiedTime *int64 `json:"lastModifiedTime,omitempty"`
+	Status *string `json:"status,omitempty"`
 	LastReconcile *int64 `json:"lastReconciledTime,omitempty"`
 	LastVerified *int64 `json:"lastVerifiedTime,omitempty"`
 }
