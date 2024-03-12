@@ -74,6 +74,55 @@ func Update() (bool, error) {
 	return false, nil
 }
 
+func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialResponse, error) {
+
+	client := hClient.GetClient()
+
+	api_uri := "https://" + *domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts/" + *id
+	method := "GET"
+
+	req, e := http.NewRequest(method, api_uri, nil)
+	if e != nil {
+		log.Fatal("Unable to construct api request.")
+	}
+
+	bearer := "Bearer " + *token
+	req.Header.Add("Authorization", bearer)
+	req.Header.Add("Content-Type", "application/json")
+
+	response, err := client.Do(req)
+	if err != nil {
+		log.Println("Failure to initialize HTTP Request")
+		return nil, err
+	}
+
+	if response.StatusCode == 200 {
+
+		responseData := cybrtypes.CredentialResponse{}
+
+		json.NewDecoder(response.Body).Decode(&responseData)
+
+		log.Printf("Response Code %d: Successfully fetched details for %s", response.StatusCode, *id)
+		return &responseData, nil
+
+	} else {
+
+		log.Printf("Unable to fetch [%s] details: ", *id)
+		log.Printf("Status %d", response.StatusCode)
+		
+		r, err := io.ReadAll(response.Body)
+		if err != nil {
+		
+			log.Fatal(err)
+		
+		}
+
+		log.Println(string(r))
+		return nil, err
+
+	}
+}
+
 func Remove(id *string, token *string, domain *string) (bool, error) {
 
 	client := hClient.GetClient()

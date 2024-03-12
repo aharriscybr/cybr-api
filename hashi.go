@@ -60,7 +60,6 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 // Interface to Creation of account
 func CreateAccount(c *cybrtypes.Credential, authToken *string, domain *string) (string, error) {
 
-
 	id, err := account.Onboard(c, authToken, domain)
 	if err != nil {
 
@@ -71,6 +70,25 @@ func CreateAccount(c *cybrtypes.Credential, authToken *string, domain *string) (
 	}
 
 	return id, nil
+}
+
+// Interface to Read account
+func GetAccount(id *string, authToken *string, domain *string) (*cybrtypes.CredentialResponse, error) {
+
+	details, err := account.Details(id, authToken, domain)
+	if err != nil {
+		log.Println("boop")
+	}
+
+	log.Println(*details)
+
+	return details, nil
+
+}
+
+
+func UpdateAccount(id *string, authToken *string, domain *string) () {
+
 }
 
 // Interface to Delete Account
@@ -87,7 +105,7 @@ func RemoveAccount(id *string, authToken *string, domain *string) (error) {
 		return nil
 
 	} else {
-		
+
 		return nil
 	}
 

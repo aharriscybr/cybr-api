@@ -69,6 +69,7 @@ type Credential struct {
 	Secret		*string `json:"secret"` // Password Value
 	SecretMgmt  SecretManagement `json:"secretManagement"`
 	Props		*AccountProps `json:"platformAccountProperties"`
+	
 }
 
 type AccountProps struct {
@@ -114,6 +115,9 @@ type SecretManagement struct {
 	AutomaticManagement bool `json:"automaticManagementEnabled"`
 	ManualManagementReason *string `json:"manualManagementReason"`
 	ModifiedTime *int `json:"createdTime,omitempty"`
+	Status *int `json:"status,omitempty"`
+	LastReconcile *int `json:"lastReconciledTime,omitempty"`
+	LastVerified *int `json:"lastVerifiedTime,omitempty"`
 }
 
 type RemoteAccess struct {
@@ -122,9 +126,17 @@ type RemoteAccess struct {
 }
 
 type CredentialResponse struct {
+	Name		*string `json:"name,omitempty"`
+	Address 	*string `json:"address,omitempty"`
+	UserName 	*string `json:"userName,omitempty"`
+	Platform	*string `json:"platformId,omitempty"`
+	SafeName    *string `json:"safeName,omitempty"`
+	SecretType	*string `json:"secretType,omitempty"`
+	Secret		*string `json:"secret,omitempty"`
+	SecretMgmt  SecretManagement `json:"secretManagement"`
+	Props		*AccountProps `json:"platformAccountProperties"`
 	CredID *string `json:"id,omitempty"`
 	CreationTime *int `json:"lastModifiedTime,omitempty"`
-	SM *SecretManagement `json:"secretManagement"`
 }
 
 type Safe struct {
