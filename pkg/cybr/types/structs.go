@@ -133,7 +133,7 @@ type CredentialResponse struct {
 	SafeName    *string `json:"safeName,omitempty"`
 	SecretType	*string `json:"secretType,omitempty"`
 	Secret		*string `json:"secret,omitempty"`
-	SecretMgmt  SecretManagement `json:"secretManagement"`
+	SecretMgmt  *SecretManagement `json:"secretManagement"`
 	Props		*AccountProps `json:"platformAccountProperties"`
 	CredID *string `json:"id,omitempty"`
 	CreationTime *int `json:"lastModifiedTime,omitempty"`
