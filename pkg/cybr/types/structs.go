@@ -67,7 +67,7 @@ type Credential struct {
 	SafeName    *string `json:"safeName"` // Required: Target Safe
 	SecretType	*string `json:"secretType"` // Type of secret (use password)
 	Secret		*string `json:"secret"` // Password Value
-	SecretMgmt  SecretManagement `json:"secretManagement"`
+	SecretMgmt  *SecretManagement `json:"secretManagement"`
 	Props		*AccountProps `json:"platformAccountProperties"`
 	
 }
@@ -112,7 +112,7 @@ type AccountProps struct {
 }
 
 type SecretManagement struct {
-	AutomaticManagement bool `json:"automaticManagementEnabled"`
+	AutomaticManagement *bool `json:"automaticManagementEnabled"`
 	ManualManagementReason *string `json:"manualManagementReason"`
 	ModifiedTime *int `json:"createdTime,omitempty"`
 	Status *int `json:"status,omitempty"`
