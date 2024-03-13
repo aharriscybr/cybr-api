@@ -69,11 +69,6 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (string,
 
 }
 
-func Update() (bool, error) {
-
-	return false, nil
-}
-
 func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialResponse, error) {
 
 	client := hClient.GetClient()

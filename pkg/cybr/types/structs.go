@@ -44,10 +44,10 @@ type Member struct {
 // Shared Services Structs
 
 type CloudConfig struct {
-	Tenant 		 *string `tfsdk:"tenant"` // Shared Services Tenant
-	ClientID 	 *string `tfsdk:"clientid"` // Email address of onboarding services account
-	ClientSecret *string `tfsdk:"clientsecret"` // Related password to onboarding services account
-	Domain		 *string `tfsdk:"domain"` // Base domain for privilege cloud
+	Tenant 		 *string `json:"tenant"` // Shared Services Tenant
+	ClientID 	 *string `json:"clientid"` // Email address of onboarding services account
+	ClientSecret *string `json:"clientsecret"` // Related password to onboarding services account
+	Domain		 *string `json:"domain"` // Base domain for privilege cloud
 }
 
 type Token struct {
@@ -133,10 +133,16 @@ type CredentialResponse struct {
 	SafeName    *string `json:"safeName,omitempty"`
 	SecretType	*string `json:"secretType,omitempty"`
 	Secret		*string `json:"secret,omitempty"`
-	SecretMgmt  *SecretManagement `json:"secretManagement"`
-	Props		*AccountProps `json:"platformAccountProperties"`
+	SecretMgmt  *SecretManagement `json:"secretManagement,omitempty"`
+	Props		*AccountProps `json:"platformAccountProperties,omitempty"`
 	CredID *string `json:"id,omitempty"`
 	CreationTime *int `json:"lastModifiedTime,omitempty"`
+}
+
+type UpdateCredential struct {
+	Op *string `json:"op"`
+	Path *string `json:"path"`
+	Value *string `json:"value"`
 }
 
 type Safe struct {
