@@ -76,10 +76,10 @@ func GetAccount(id *string, authToken *string, domain *string) (*cybrtypes.Crede
 
 	details, err := account.Details(id, authToken, domain)
 	if err != nil {
-		log.Println("boop")
-	}
 
-	log.Println(*details)
+		log.Println("boop")
+
+	}
 
 	return details, nil
 
