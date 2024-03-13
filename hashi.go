@@ -16,7 +16,6 @@ type Client struct {
 	Domain *string
 }
 
-
 // Register new Authentication session and client details
 func NewClient(tenant *string, domain *string, clientid *string, clientsecret *string) (*Client, error) {
 
@@ -83,11 +82,6 @@ func GetAccount(id *string, authToken *string, domain *string) (*cybrtypes.Crede
 	log.Println(*details)
 
 	return details, nil
-
-}
-
-
-func UpdateAccount(id *string, authToken *string, domain *string) () {
 
 }
 

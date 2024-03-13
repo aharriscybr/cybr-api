@@ -13,7 +13,7 @@ import (
 
 // Get Full Administrator Permissions
 // intakes a user type string and user string to bundle permissions
-func FullAdmin(UserType string, User string) ([]byte, error) {
+func FullAdmin(UserType *string, User *string) ([]byte, error) {
 
 	Perm := Permission {
 	ManageSafe:								true,
@@ -41,12 +41,12 @@ func FullAdmin(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: &User,
-		MemberType: &UserType,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
-	if &User == nil || &UserType == nil {
+	if User == nil || UserType == nil {
 
 		log.Fatal("User or User Type is null")
 		return nil, nil
@@ -64,7 +64,7 @@ func FullAdmin(UserType string, User string) ([]byte, error) {
 
 // Get Read Only Permissions
 // intakes a user type string and user string to bundle permissions
-func ReadOnly(UserType string, User string) ([]byte, error) {
+func ReadOnly(UserType *string, User *string) ([]byte, error) {
 
 	Perm := Permission {
 	UseAccounts:							true,
@@ -72,7 +72,7 @@ func ReadOnly(UserType string, User string) ([]byte, error) {
 	ListAccounts:							true,
 	}
 
-	if &User == nil || &UserType == nil {
+	if User == nil || UserType == nil {
 
 		log.Fatal("User or User Type is null")
 		return nil, nil
@@ -80,8 +80,8 @@ func ReadOnly(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: &User,
-		MemberType: &UserType,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
@@ -96,7 +96,7 @@ func ReadOnly(UserType string, User string) ([]byte, error) {
 
 // Get Approver Permissions
 // intakes a user type string and user string to bundle permissions
-func Approver(UserType string, User string) ([]byte, error) {
+func Approver(UserType *string, User *string) ([]byte, error) {
 
 	Perm := Permission {
 	UseAccounts:							true,
@@ -106,7 +106,7 @@ func Approver(UserType string, User string) ([]byte, error) {
 	ManageSafeMembers:						true,
 	}
 
-	if &User == nil || &UserType == nil {
+	if User == nil || UserType == nil {
 
 		log.Fatal("User or User Type is null")
 		return nil, nil
@@ -114,8 +114,8 @@ func Approver(UserType string, User string) ([]byte, error) {
 	}
 
 	userBlock := Member {
-		Member: &User,
-		MemberType: &UserType,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
@@ -130,7 +130,7 @@ func Approver(UserType string, User string) ([]byte, error) {
 
 // Get Safe Manager Permissions
 // intakes a user type string and user string to bundle permissions
-func Manager(UserType string, User string) ([]byte, error)  {
+func Manager(UserType *string, User *string) ([]byte, error)  {
 
 	Perm := Permission {
 	ManageSafeMembers:						true,
@@ -150,7 +150,7 @@ func Manager(UserType string, User string) ([]byte, error)  {
 	AccessWithoutConfirmation:				true,
 	}
 
-	if &User == nil || &UserType == nil {
+	if User == nil || UserType == nil {
 
 		log.Fatal("User or User Type is null")
 		return nil, nil
@@ -158,8 +158,8 @@ func Manager(UserType string, User string) ([]byte, error)  {
 	}
 
 	userBlock := Member {
-		Member: &User,
-		MemberType: &UserType,
+		Member: User,
+		MemberType: UserType,
 		Perm: Perm,
 	}
 
