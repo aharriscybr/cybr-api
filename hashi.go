@@ -22,6 +22,7 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 	hclient := client.GetClient()
 
 	if tenant == nil || domain == nil || clientid == nil || clientsecret == nil {
+		log.Println("Required information has not been set.")
 		return nil, nil
 	}
 
@@ -76,10 +77,10 @@ func GetAccount(id *string, authToken *string, domain *string) (*cybrtypes.Crede
 
 	details, err := account.Details(id, authToken, domain)
 	if err != nil {
-		log.Println("boop")
-	}
 
-	log.Println(*details)
+		log.Println("boop")
+
+	}
 
 	return details, nil
 

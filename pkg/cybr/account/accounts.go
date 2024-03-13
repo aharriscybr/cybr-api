@@ -45,7 +45,7 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (string,
 
 		json.NewDecoder(response.Body).Decode(&responseData)
 
-		log.Printf("Onboarded %s to %s", *cred.Name, *cred.SafeName)
+		log.Printf("Successfully Onboarded [%s] to [%s]", *cred.Name, *cred.SafeName)
 
 		credID := *responseData.CredID
 
@@ -54,7 +54,7 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (string,
 	} else {
 		
 		log.Println("Your Credential was not onboarded, the vault rejected your request: ")
-		log.Printf("Status %d", response.StatusCode)
+		log.Printf("Status [%d]", response.StatusCode)
 		
 		r, err := io.ReadAll(response.Body)
 		if err != nil {
@@ -103,7 +103,7 @@ func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialRe
 	} else {
 
 		log.Printf("Unable to fetch [%s] details: ", *id)
-		log.Printf("Status %d", response.StatusCode)
+		log.Printf("Status [%d]", response.StatusCode)
 		
 		r, err := io.ReadAll(response.Body)
 		if err != nil {
@@ -142,13 +142,13 @@ func Remove(id *string, token *string, domain *string) (bool, error) {
 
 	if response.StatusCode == 204 {
 
-		log.Printf("Response Code %d: Successfully removed %s", response.StatusCode, *id)
+		log.Printf("Response Code [%d]: Successfully removed [%s]", response.StatusCode, *id)
 		return true, nil
 
 	} else {
 
 		log.Println("Your Credential was not onboarded, the vault rejected your request: ")
-		log.Printf("Status %d", response.StatusCode)
+		log.Printf("Status [%d]", response.StatusCode)
 		
 		r, err := io.ReadAll(response.Body)
 		if err != nil {
