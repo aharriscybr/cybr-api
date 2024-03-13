@@ -65,9 +65,9 @@ func GetIdentityToken(a *types.CloudConfig) (token string, result bool, err erro
 
 	} else {
 
-		log.Println(string(body))
+		
 		log.Printf("Failed to authenticate: %d", res.StatusCode)
-
+		log.Println(string(body))
 		return "Unable to authenticate to Shared Services.", false, err
 
 	}

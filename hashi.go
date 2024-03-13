@@ -22,6 +22,7 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 	hclient := client.GetClient()
 
 	if tenant == nil || domain == nil || clientid == nil || clientsecret == nil {
+		log.Println("Required information has not been set.")
 		return nil, nil
 	}
 
