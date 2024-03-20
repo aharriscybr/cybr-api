@@ -57,6 +57,12 @@ func NewClient(tenant *string, domain *string, clientid *string, clientsecret *s
 
 }
 
+/*
+=========================================
+* Account Management
+=========================================
+*/
+
 // Interface to Creation of account
 func CreateAccount(c *cybrtypes.Credential, authToken *string, domain *string) (string, error) {
 
@@ -78,7 +84,8 @@ func GetAccount(id *string, authToken *string, domain *string) (*cybrtypes.Crede
 	details, err := account.Details(id, authToken, domain)
 	if err != nil {
 
-		log.Println("boop")
+		log.Println("Error retrieving details.... boop.")
+		return nil, err
 
 	}
 
@@ -104,4 +111,25 @@ func RemoveAccount(id *string, authToken *string, domain *string) (error) {
 		return nil
 	}
 
+}
+
+/*
+=========================================
+* Safe Management
+=========================================
+*/
+
+// Interface to Creation of account
+func CreateSafe(c *cybrtypes.Credential, authToken *string, domain *string) (string, error) {
+
+	id, err := account.Onboard(c, authToken, domain)
+	if err != nil {
+
+		log.Println("Unable to onboard account, please check information and try again.")
+
+		return "", nil
+
+	}
+
+	return id, nil
 }
