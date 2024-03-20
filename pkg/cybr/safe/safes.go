@@ -43,13 +43,11 @@ func Onboard(safe *cybrtypes.SafeData, token *string, domain *string) (*cybrtype
 
 		responseData := cybrtypes.SafeData{}
 
-		err := json.NewDecoder(response.Body).Decode(&responseData)
-		if err != nil {
-			log.Println("Unable to decode JSON response from vault API")
-			return nil, err
-		}
+		log.Println(json.NewDecoder(response.Body).Decode(&responseData))
 
-		log.Printf("Successfully Onboarded [%s]: Name [%s] - ID [%s]", *responseData.Name, *responseData.URLID, *responseData.NUMBER,)
+		json.NewDecoder(response.Body).Decode(&responseData)
+
+		log.Printf("Successfully Onboarded [%s]: Name [%s] - ID [%v]", *responseData.Name, *responseData.URLID, *responseData.NUMBER,)
 
 		return &responseData, err
 
@@ -148,7 +146,7 @@ func Remove(id *string, token *string, domain *string) (bool, error) {
 
 	if response.StatusCode == 204 {
 
-		log.Printf("Response Code [%d]: Successfully removed [%s]", response.StatusCode, *id)
+		log.Printf("Response Code [%d]: Successfully removed [%v]", response.StatusCode, *id)
 		return true, nil
 
 	} else {
