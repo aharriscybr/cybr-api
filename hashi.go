@@ -133,3 +133,23 @@ func CreateSafe(c *cybrtypes.Credential, authToken *string, domain *string) (str
 
 	return id, nil
 }
+
+// Interface to Delete Account
+func RemoveSafe(id *string, authToken *string, domain *string) (error) {
+
+	result, err := account.Remove(id, authToken, domain)
+	if err != nil {
+		
+		return err
+	}
+
+	if result {
+
+		return nil
+
+	} else {
+
+		return nil
+	}
+
+}
