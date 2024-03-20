@@ -7,6 +7,7 @@ import (
 	account "github.com/aharriscybr/cybr-api/pkg/cybr/account"
 	auth "github.com/aharriscybr/cybr-api/pkg/cybr/auth"
 	client "github.com/aharriscybr/cybr-api/pkg/cybr/http"
+	safe "github.com/aharriscybr/cybr-api/pkg/cybr/safe"
 	cybrtypes "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
@@ -137,7 +138,7 @@ func CreateSafe(c *cybrtypes.Credential, authToken *string, domain *string) (str
 // Interface to Delete Account
 func RemoveSafe(id *string, authToken *string, domain *string) (error) {
 
-	result, err := account.Remove(id, authToken, domain)
+	result, err := safe.Remove(id, authToken, domain)
 	if err != nil {
 		
 		return err

@@ -43,11 +43,7 @@ func Onboard(cred *cybrtypes.Credential, token *string, domain *string) (string,
 
 		responseData := cybrtypes.CredentialResponse{}
 
-		err := json.NewDecoder(response.Body).Decode(&responseData)
-		if err != nil {
-			log.Println("Unable to decode JSON response from vault API")
-			return "", err
-		}
+		json.NewDecoder(response.Body).Decode(&responseData)
 
 		log.Printf("Successfully Onboarded [%s] to [%s]", *cred.Name, *cred.SafeName)
 
@@ -99,11 +95,7 @@ func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialRe
 
 		responseData := cybrtypes.CredentialResponse{}
 
-		err := json.NewDecoder(response.Body).Decode(&responseData)
-		if err != nil {
-			log.Println("Unable to decode JSON response from vault API")
-			return nil, err
-		}
+		json.NewDecoder(response.Body).Decode(&responseData)
 
 		log.Printf("Response Code %d: Successfully fetched details for %s", response.StatusCode, *id)
 		return &responseData, nil

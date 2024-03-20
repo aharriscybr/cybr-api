@@ -147,14 +147,14 @@ type UpdateCredential struct {
 
 type SafeData struct {
 
-	RetentionDays *string `json:"numberOfDaysRetention,omitempty"`
+	RetentionDays *int `json:"numberOfDaysRetention,omitempty"`
 	RetentionVersions *string `json:"numberOfVersionsRetention,omitempty"`
-	PurgeEnabled *string `json:"autoPurgeEnabled,omitempty"`
+	PurgeEnabled *bool `json:"autoPurgeEnabled,omitempty"`
 	CPM *string `json:"managingCPM,omitempty"`
 	Name *string `json:"safeName"`
 	Description *string `json:"description,omitempty"`
 	Location *string `json:"location,omitempty"`
 	URLID *string `json:"safeUrlId,omitempty"`
-	NUMBER *string `json:"safeNumber,omitempty"`
+	NUMBER *int `json:"safeNumber,omitempty"`
 
 }
