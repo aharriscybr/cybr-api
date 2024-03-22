@@ -69,58 +69,58 @@ func Onboard(safe *cybrtypes.SafeData, token *string, domain *string) (*cybrtype
 
 }
 
-// func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialResponse, error) {
+func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialResponse, error) {
 
-// 	client := hClient.GetClient()
+	client := hClient.GetClient()
 
-// 	api_uri := "https://" + *domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts/" + *id
-// 	method := "GET"
+	api_uri := "https://" + *domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts/" + *id
+	method := "GET"
 
-// 	req, e := http.NewRequest(method, api_uri, nil)
-// 	if e != nil {
-// 		log.Fatal("Unable to construct api request.")
-// 	}
+	req, e := http.NewRequest(method, api_uri, nil)
+	if e != nil {
+		log.Fatal("Unable to construct api request.")
+	}
 
-// 	bearer := "Bearer " + *token
-// 	req.Header.Add("Authorization", bearer)
-// 	req.Header.Add("Content-Type", "application/json")
+	bearer := "Bearer " + *token
+	req.Header.Add("Authorization", bearer)
+	req.Header.Add("Content-Type", "application/json")
 
-// 	response, err := client.Do(req)
-// 	if err != nil {
-// 		log.Println("Failure to initialize HTTP Request")
-// 		return nil, err
-// 	}
+	response, err := client.Do(req)
+	if err != nil {
+		log.Println("Failure to initialize HTTP Request")
+		return nil, err
+	}
 
-// 	if response.StatusCode == 200 {
+	if response.StatusCode == 200 {
 
-// 		responseData := cybrtypes.CredentialResponse{}
+		responseData := cybrtypes.CredentialResponse{}
 
-// 		err := json.NewDecoder(response.Body).Decode(&responseData)
-		// if err != nil {
-		// 	log.Println("Unable to decode JSON response from vault API")
-		// 	return nil, err
-		// }
+		err := json.NewDecoder(response.Body).Decode(&responseData)
+		if err != nil {
+			log.Println("Unable to decode JSON response from vault API")
+			return nil, err
+		}
 
-// 		log.Printf("Response Code %d: Successfully fetched details for %s", response.StatusCode, *id)
-// 		return &responseData, nil
+		log.Printf("Response Code %d: Successfully fetched details for %s", response.StatusCode, *id)
+		return &responseData, nil
 
-// 	} else {
+	} else {
 
-// 		log.Printf("Unable to fetch [%s] details: ", *id)
-// 		log.Printf("Status [%d]", response.StatusCode)
+		log.Printf("Unable to fetch [%s] details: ", *id)
+		log.Printf("Status [%d]", response.StatusCode)
 		
-// 		r, err := io.ReadAll(response.Body)
-// 		if err != nil {
+		r, err := io.ReadAll(response.Body)
+		if err != nil {
 		
-// 			log.Fatal(err)
+			log.Fatal(err)
 		
-// 		}
+		}
 
-// 		log.Println(string(r))
-// 		return nil, err
+		log.Println(string(r))
+		return nil, err
 
-// 	}
-// }
+	}
+}
 
 func Remove(id *string, token *string, domain *string) (bool, error) {
 
