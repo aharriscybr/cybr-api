@@ -120,22 +120,22 @@ func RemoveAccount(id *string, authToken *string, domain *string) (error) {
 =========================================
 */
 
-// Interface to Creation of account
-func CreateSafe(c *cybrtypes.Credential, authToken *string, domain *string) (string, error) {
+// Interface to Creation of safe
+func CreateSafe(s *cybrtypes.SafeData, authToken *string, domain *string) (*cybrtypes.SafeData, error) {
 
-	id, err := account.Onboard(c, authToken, domain)
+	safe, err := safe.Onboard(s, authToken, domain)
 	if err != nil {
 
-		log.Println("Unable to onboard account, please check information and try again.")
+		log.Println("Unable to onboard safe, please check information and try again.")
 
-		return "", nil
+		return nil, nil
 
 	}
 
-	return id, nil
+	return safe, nil
 }
 
-// Interface to Delete Account
+// Interface to Delete Safe
 func RemoveSafe(id *string, authToken *string, domain *string) (error) {
 
 	result, err := safe.Remove(id, authToken, domain)
