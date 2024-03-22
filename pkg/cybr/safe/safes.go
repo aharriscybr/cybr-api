@@ -43,8 +43,6 @@ func Onboard(safe *cybrtypes.SafeData, token *string, domain *string) (*cybrtype
 
 		responseData := cybrtypes.SafeData{}
 
-		log.Println(json.NewDecoder(response.Body).Decode(&responseData))
-
 		json.NewDecoder(response.Body).Decode(&responseData)
 
 		log.Printf("Successfully Onboarded [%s]: Name [%s] - ID [%v]", *responseData.Name, *responseData.URLID, *responseData.NUMBER,)
