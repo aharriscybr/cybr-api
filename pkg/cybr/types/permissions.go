@@ -37,7 +37,7 @@ func FullAdmin(UserType *string, User *string) ([]byte, error) {
 	DeleteFolders:							true,
 	MoveAccountsAndFolders:					true,
 	RequestsAuthorizationLevel1:			true,
-	RequestsAuthorizationLevel2:			true,
+	RequestsAuthorizationLevel2:			false,
 	}
 
 	userBlock := Member {

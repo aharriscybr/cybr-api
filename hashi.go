@@ -7,7 +7,7 @@ import (
 	account "github.com/aharriscybr/cybr-api/pkg/cybr/account"
 	auth "github.com/aharriscybr/cybr-api/pkg/cybr/auth"
 	client "github.com/aharriscybr/cybr-api/pkg/cybr/http"
-	safe "github.com/aharriscybr/cybr-api/pkg/cybr/safe"
+	safes "github.com/aharriscybr/cybr-api/pkg/cybr/safe"
 	cybrtypes "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
@@ -123,7 +123,7 @@ func RemoveAccount(id *string, authToken *string, domain *string) (error) {
 // Interface to Creation of safe
 func CreateSafe(s *cybrtypes.SafeData, authToken *string, domain *string) (*cybrtypes.SafeData, error) {
 
-	safe, err := safe.Onboard(s, authToken, domain)
+	safe, err := safes.Onboard(s, authToken, domain)
 	if err != nil {
 
 		log.Println("Unable to onboard safe, please check information and try again.")
@@ -132,13 +132,61 @@ func CreateSafe(s *cybrtypes.SafeData, authToken *string, domain *string) (*cybr
 
 	}
 
-	return safe, nil
+	log.Printf("Generating Permission %s.", *s.Level)
+	log.Printf("Ownership Properties: %s, %s, %s", *s.Owner, *s.OwnerType, *s.Level)
+
+	var block []byte
+
+	if *s.Level == "full" {
+		block, err = cybrtypes.FullAdmin(s.OwnerType, s.Owner)
+		if err != nil {
+			log.Println("Error generating permissions block.")
+		}
+	}
+	if *s.Level == "read" {
+		block, err = cybrtypes.ReadOnly(s.OwnerType, s.Owner)
+		if err != nil {
+			log.Println("Error generating permissions block.")
+		}
+	}
+	if *s.Level == "approver" {
+		block, err = cybrtypes.Approver(s.OwnerType, s.Owner)
+		if err != nil {
+
+			log.Println("Error generating permissions block.")
+		}
+	}
+	if *s.Level == "manager" {
+		block, err = cybrtypes.Manager(s.OwnerType, s.Owner)
+		if err != nil {
+			log.Println("Error generating permissions block.")
+		}
+	}
+
+	log.Println(string(block))
+
+	result, err := safes.AddMember(s.URLID, block, authToken, domain)
+	if err != nil {
+		log.Println("Unable to update membership.")
+	}
+
+	if result {
+		
+		return safe, nil
+	
+	} else {
+
+		log.Println("One or more errors occurred in provisioning the safe, please check your values and logs and try again.")
+		return nil, nil
+
+	}
+	
 }
 
 // Interface to Delete Safe
 func RemoveSafe(id *string, authToken *string, domain *string) (error) {
 
-	result, err := safe.Remove(id, authToken, domain)
+	result, err := safes.Remove(id, authToken, domain)
 	if err != nil {
 		
 		return err
