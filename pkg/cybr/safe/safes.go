@@ -67,11 +67,12 @@ func Onboard(safe *cybrtypes.SafeData, token *string, domain *string) (*cybrtype
 
 }
 
-func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialResponse, error) {
+// Retrieve safe details
+func Details(id *string, token *string, domain *string) (*cybrtypes.SafeData, error) {
 
 	client := hClient.GetClient()
 
-	api_uri := "https://" + *domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Accounts/" + *id
+	api_uri := "https://" + *domain + ".privilegecloud.cyberark.cloud/PasswordVault/API/Safes/" + *id
 	method := "GET"
 
 	req, e := http.NewRequest(method, api_uri, nil)
@@ -91,7 +92,7 @@ func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialRe
 
 	if response.StatusCode == 200 {
 
-		responseData := cybrtypes.CredentialResponse{}
+		responseData := cybrtypes.SafeData{}
 
 		err := json.NewDecoder(response.Body).Decode(&responseData)
 		if err != nil {
@@ -119,6 +120,8 @@ func Details(id *string, token *string, domain *string) (*cybrtypes.CredentialRe
 
 	}
 }
+
+
 
 func Remove(id *string, token *string, domain *string) (bool, error) {
 

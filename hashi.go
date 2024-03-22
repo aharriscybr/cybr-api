@@ -183,6 +183,21 @@ func CreateSafe(s *cybrtypes.SafeData, authToken *string, domain *string) (*cybr
 	
 }
 
+// Interface to Read Safe
+func GetSafe(id *string, authToken *string, domain *string) (*cybrtypes.SafeData, error) {
+
+	details, err := safes.Details(id, authToken, domain)
+	if err != nil {
+
+		log.Println("Error retrieving details.... boop.")
+		return nil, err
+
+	}
+
+	return details, nil
+
+}
+
 // Interface to Delete Safe
 func RemoveSafe(id *string, authToken *string, domain *string) (error) {
 
