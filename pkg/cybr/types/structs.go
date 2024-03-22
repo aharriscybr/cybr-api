@@ -156,5 +156,7 @@ type SafeData struct {
 	Location *string `json:"location,omitempty"`
 	URLID *string `json:"safeUrlId,omitempty"`
 	NUMBER *int64 `json:"safeNumber,omitempty"`
-
+	Owner *string 
+	OwnerType *string
+	Level *string
 }
