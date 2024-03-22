@@ -165,7 +165,7 @@ func CreateSafe(s *cybrtypes.SafeData, authToken *string, domain *string) (*cybr
 
 	log.Println(string(block))
 
-	result, err := safes.AddMember(s.URLID, block, authToken, domain)
+	result, err := safes.AddMember(s.Name, block, authToken, domain)
 	if err != nil {
 		log.Println("Unable to update membership.")
 	}
