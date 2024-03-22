@@ -11,7 +11,7 @@ import (
 	cybrtypes "github.com/aharriscybr/cybr-api/pkg/cybr/types"
 )
 
-// Onboard Credentials into safe
+// Onboard Safe
 func Onboard(safe *cybrtypes.SafeData, token *string, domain *string) (*cybrtypes.SafeData, error) {
 
 	client := hClient.GetClient()
