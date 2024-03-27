@@ -36,9 +36,14 @@ type Permission struct {
 // ACL Struct
 
 type Member struct {
-	Member			*string `json:"memberName"`
-	MemberType 		*string `json:"memberType"`
-	Perm 			Permission `json:"permissions"`
+	Member			*string `json:"memberName,omitempty"`
+	MemberType 		*string `json:"memberType,omitempty"`
+	Perm 			Permission `json:"permissions,omitempty"`
+
+}
+
+type MemberACL struct {
+	PermBlock []byte `json:"omitempty"`
 }
 
 // Shared Services Structs
@@ -146,7 +151,6 @@ type UpdateCredential struct {
 }
 
 type SafeData struct {
-
 	RetentionDays *int64 `json:"numberOfDaysRetention,omitempty"`
 	RetentionVersions *int64 `json:"numberOfVersionsRetention,omitempty"`
 	PurgeEnabled *bool `json:"autoPurgeEnabled,omitempty"`

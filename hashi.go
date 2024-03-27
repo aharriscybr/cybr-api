@@ -163,6 +163,7 @@ func CreateSafe(s *cybrtypes.SafeData, authToken *string, domain *string) (*cybr
 		}
 	}
 
+	log.Printf("Generated permission block for [%s]:", *s.Owner)
 	log.Println(string(block))
 
 	result, err := safes.AddMember(s.Name, block, authToken, domain)
@@ -215,5 +216,41 @@ func RemoveSafe(id *string, authToken *string, domain *string) (error) {
 
 		return nil
 	}
+
+}
+
+/*
+=========================================
+* Safe Member Management
+=========================================
+*/
+
+func SetMembers(m []cybrtypes.MemberACL, safe *string, authToken *string, domain *string) (bool, error) {
+
+	result := false
+
+	for _, member := range m {
+		mem := []byte(member.PermBlock)
+		result, e := safes.AddMember(safe, mem, authToken, domain)
+		if e != nil {
+			return false, e
+		}
+		if !result {
+			log.Printf("Unable to add member to [%s]", *safe)
+			log.Println(string(mem))
+		}
+	}
+
+	if result {
+
+		return true, nil
+
+	} else {
+
+		log.Println("Partial Success of added membership. Check details and logs and try again.")
+		return false, nil
+
+	}
+	
 
 }
